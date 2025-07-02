@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,709;1,709&display=swap');
+div#screen_main {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	//z-index: 1;
+	position: relative;
+}
+
+div#keypad {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	position: absolute;
+	row-gap: 155vmin;
+
+}
+
+div#keypad div.row {
+	display: flex;
+	flex-direction: row;
+	//justify-content: space-between;
+	align-items: center;
+	
+}
+
+div.boxButton {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	display: flex;
+	color: white;;
+}
+
+div.boxButton:active {
+	transform: scale(0.9);
+}
+
+div.retro div.boxButton {
+  transition: transform 0.4s ease;
+}
+
+div.retro div.boxButton:active {
+	transform: scale(0.85);
+}
+
+div.boxButton div {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	font-size: 4vmin;
+	font-family: "Consolas", "Roboto", sans-serif;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none; 
+  -moz-user-select: none;
+  -ms-user-select: none; 
+  user-select: none;
+  cursor: pointer; 
+}
+
+
+
+/*div.retro div.boxButton div {
+  padding-top: 0.5px;
+  font-size: 3.5vmin;
+  font-family: 'Retro';
+  font-weight: bold;
+}*/
+
+div.boxLight {
+	position: absolute;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	border: none;
+	outline: none;
+	text-decoration: none;
+	border-image: none;
+	pointer-events: none;
+}
+
+/*div.retro div.boxLight {
+	transition: opacity 2.5s ease, visibility ease 2.5s;
+}*/
+
+
+///////
+
+.dialContainer{
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	display: flex;
+	position: absolute;
+	transform: (-50%, - 50px); // Centra el lock en la pantalla
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.telephoneContainer{
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	display: flex;
+	position: absolute;
+	transform: (-50%, - 50px); // Centra el lock en la pantalla
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+
+.dial{
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	display: flex;
+	pointer-events: none;
+	position: absolute;
+	cursor: pointer;
+}
+//
+
+div.pivote{
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	display: flex;
+	position: absolute;
+}
+
+.number{
+	font-size:2vmin;
+	color:white;
+	//right: "41%" , top: "40%", 
+	position:absolute; 
+	font-family: "Roboto", sans-serif;
+	pointer-events: none;
+}
+
+.numberContainer{
+	display: flex;
+	position: relative;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	pointer-events: none;
+}
+
+.telephone_screen{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	position: absolute;
+	font-family: "Roboto", sans-serif;
+}
+
+.dot-ellipsis::after {
+  content: '';
+  display: inline-block;
+  width: 1.5em;
+  text-align: left;
+  animation: dots 1.2s steps(3, end) infinite;
+}
+
+@keyframes dots {
+  0%   { content: ''; }
+  33%  { content: '.'; }
+  66%  { content: '..'; }
+  100% { content: '...'; }
+}
