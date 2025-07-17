@@ -41,6 +41,14 @@ const MainScreen = (props) => {
   //
   const [password, setPassword] = useState("");
 
+  const secondarySolutionRef = useRef(false); // Array para guardar la solución secundaria
+  const [callTimer, setCallTimer] = useState(null);
+  const [timer, setTimer] = useState(0); 
+
+  const callingEndedRef = useRef(false);
+  const puzzleCheckedRef = useRef(false);
+  const resultRef = useRef({success: false, password: ""});
+
   
 //
 
@@ -153,44 +161,7 @@ const MainScreen = (props) => {
     setLightTop(_lightTop);
   }
 
-  /*const onClickButton = (value) => {
-    if (processingSolution) {
-      return;
-    }
-    Utils.log("onClickButton", value);
-    setProcessingSolution(true);
 
-    const shortBeep = document.getElementById("audio_beep");
-    shortBeep.pause();
-    shortBeep.currentTime = 0;
-    shortBeep.play();
-
-    setTimeout(() => {
-      currentSolution.push(value);
-      if (currentSolution.length < appSettings.solutionLength) {
-        setCurrentSolution(currentSolution);
-        setProcessingSolution(false);
-      } else {
-        const solution = currentSolution.join((["COLORS","SYMBOLS"].indexOf(appSettings.keysType) !== -1) ? ";" : "");
-        setCurrentSolution([]);
-        Utils.log("Check solution", solution);
-        escapp.checkNextPuzzle(solution, {}, (success, erState) => {
-          Utils.log("Check solution Escapp response", success, erState);
-          try {
-            setTimeout(() => {
-              changeBoxLight(success, solution);
-            }, 700);
-          } catch(e){
-            Utils.log("Error in checkNextPuzzle",e);
-          }
-        });
-      }
-    }, 300);
-  }*/
-
-  const callingEndedRef = useRef(false);
-  const puzzleCheckedRef = useRef(false);
-  const resultRef = useRef({success: false, password: ""});
 
   const checkSolution = () => {
     setProcessingSolution(true);
@@ -202,40 +173,48 @@ const MainScreen = (props) => {
     
     const audio_calling = document.getElementById("audio_calling");
     audio_calling.play();
-    
+
+    const telephoneCall = appSettings.telephoneNumbers.find((telephoneNumber) => telephoneNumber.number === password);
+    if (telephoneCall) {
+      puzzleCheckedRef.current = true;
+      resultRef.current = {success: true, password};
+      secondarySolutionRef.current = true;
+      maybeProceed();
+    }
+
     audio_calling.onended = () => {
       callingEndedRef.current = true;
       maybeProceed();
     };
-    escapp.checkNextPuzzle(password, {}, (success, erState) => {
-          Utils.log("Check solution Escapp response", success, erState);
-          //audio_calling.onended = () => {
-            try {            
-              //setTimeout(() => {
-                puzzleCheckedRef.current = true;
-                resultRef.current = {success, password};
-                maybeProceed();
-                            //changeBoxLight(success, password);
-              //}, 700);            
-            } catch(e){
-              Utils.log("Error in checkNextPuzzle",e);
-            }
-          //}
-        });
+    
+    if(!telephoneCall) {
+      escapp.checkNextPuzzle(password, {}, (success, erState) => {
+            Utils.log("Check solution Escapp response", success, erState);
+            //audio_calling.onended = () => {
+              try {            
+                //setTimeout(() => {
+                  puzzleCheckedRef.current = true;
+                  resultRef.current = {success, password};
+                  maybeProceed();
+                    //changeBoxLight(success, password);
+                //}, 700);            
+              } catch(e){
+                Utils.log("Error in checkNextPuzzle",e);
+              }
+            //}
+          });
+    }
   }
 
   function maybeProceed() {
     if (callingEndedRef.current && puzzleCheckedRef.current) {
       setTimeout(() => {
-        changeBoxLight(resultRef.current.success, resultRef.current.password);
+        secondarySolutionRef.current ? secondaryCall() : changeBoxLight(resultRef.current.success, resultRef.current.password);
       }, 700);
     }
   }
 
   const changeBoxLight = (success, solution) => {
-    //let audio_calling = document.getElementById("audio_calling");
-    //audio_calling.play();
-    //if (!callingEndedRef.current || !puzzleCheckedRef.current) return;
     let audio;
     let post_success_audio;
     let afterChangeBoxLightDelay = 3000;
@@ -260,7 +239,7 @@ const MainScreen = (props) => {
     }, afterChangeBoxLightDelay);
 
     if(success){
-      audio_calling.pause();
+      //audio_calling.pause();
       audio.play();
 
       //setTimeout(() => {     
@@ -282,6 +261,23 @@ const MainScreen = (props) => {
       //audio_calling.pause();
       //audio_calling.play();
       audio.play();
+  }
+
+  const secondaryCall = () => {
+    Utils.log("secondaryCall", password);
+    setLight("ok");
+    let audio = document.getElementById("audio_success");
+    audio.play();
+    audio.onended = () => {
+      let calling_audio = document.getElementById("audio_telephone_" + password);
+      calling_audio.play();
+      calling_audio.onended = () => {
+        reset();  
+        setProcessingSolution(false);
+        setLight("off");
+      };
+    }
+
   }
 
   //Pone la imagen del fondo
@@ -337,7 +333,7 @@ const MainScreen = (props) => {
     const p = pRef.current;
     if (!container || !p) return;
 
-    // Extrae el número de vmin (por ejemplo, "6vmin" => 6)
+  
     const maxFontSize = parseFloat(appSettings.screenFontSize) || 6;
     let fontSize = maxFontSize;
     p.style.fontSize = fontSize + "vmin";
@@ -418,7 +414,7 @@ const MainScreen = (props) => {
       <div className="boxLight boxLight_on" style={{ visibility: (light === "on" ||  light === "nok" || light === "ok") ? "visible" : "hidden", opacity: (light === "on" || light==="nok" || light==="ok") ? "1" : "0", width: lightWidth, height: lightHeight, backgroundImage: 'url("' + appSettings.imageLightWaiting + '")', left: lightLeft, top: lightTop , transition: "opacity 1s, transform 0.5s",}} ></div> 
 
       
-      <div style={{ visibility: (light === "on") ? "visible" : "hidden", opacity: (light === "on")  ? "1" : "0",  transition: "opacity 1s, transform 1s", zIndex:"4", left: callingTextMarginLeft, top: callingTextMarginTop, position:"absolute", display: "flex", justifyContent:"center", display:"flex", width:"100%"}} >
+      <div style={{ visibility: (light === "on") ? "visible" : "hidden", opacity: (light === "on")  ? "1" : "0",  transition: "opacity 1s, transform 1s", zIndex:"4", left: callingTextMarginLeft, top: callingTextMarginTop, position:"absolute", display: "flex", justifyContent:"center", width:"100%"}} >
         <p style={{color:appSettings.callingFontColor, fontSize:appSettings.callingFontSize}}>{I18n.getTrans("i.calling")}<span className="dot-ellipsis"></span></p>
       </div>
       <div style={{ visibility: (light === "nok") ? "visible" : "hidden", opacity: (light === "nok")  ? "1" : "0",  transition: "opacity 1s, transform 1s", zIndex:"4", left: callingTextMarginLeft, top: callingTextMarginTop, position:"absolute", justifyContent:"center", display:"flex", width:"100%"}} >
@@ -437,12 +433,12 @@ const MainScreen = (props) => {
     const ss = String(seconds % 60).padStart(2, '0');
     return `${mm}:${ss}`;
   }
-  const [timer, setTimer] = useState(0);
+
 
   useEffect(() => {
     let interval;
     if (light === "ok") {
-      setTimer(0); // Reinicia el timer cada vez que entra en "ok"
+      setTimer(0);
       interval = setInterval(() => {
         setTimer((prev) => prev + 1);
       }, 1000);
@@ -453,6 +449,7 @@ const MainScreen = (props) => {
 
   const  reset = () =>{
     setPassword("");
+    secondarySolutionRef.current = false;
     setTimeout(() => {      
       setIsReseting(false);
     }, 2500);
@@ -497,8 +494,18 @@ const MainScreen = (props) => {
         <audio id="audio_success" src={appSettings.soundOk} preload="auto"></audio>
         <audio id="audio_failure" src={appSettings.soundNok} preload="auto"></audio>
         <audio id="audio_calling" src={appSettings.soundCalling} preload="auto"></audio>
+        <audio id="audio_call" src={appSettings.soundReset} preload="auto"></audio>
         {appSettings.actionAfterSolve === "PLAY_SOUND" && <audio id="audio_post_success" src={appSettings.soundPostSuccess} preload="auto"></audio>}
-     
+
+        {/* Elementos de audio dinámicos para cada número de teléfono */}
+        {appSettings.telephoneNumbers && appSettings.telephoneNumbers.map((telephoneNumber, index) => (
+          telephoneNumber.src && <audio 
+            key={`telephone-audio-${index}`}
+            id={`audio_telephone_${telephoneNumber.number}`} 
+            src={telephoneNumber.src} 
+            preload="auto"
+          ></audio>
+        ))}
     </div>);
 };
 
