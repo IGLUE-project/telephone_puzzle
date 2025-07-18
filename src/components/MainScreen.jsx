@@ -36,7 +36,7 @@ const MainScreen = (props) => {
 
   //
   const [rotationAngle, setRotationAngle] = useState(0); // Estado para la rotación
-  const [isReseting, setIsReseting] = useState(false); // Estado para saber si se está reiniciando el lock
+  const [softReset, setSoftReset] = useState(false); // Estado para saber si se está reiniciando el lock
 
   //
   const [password, setPassword] = useState("");
@@ -477,6 +477,7 @@ const MainScreen = (props) => {
         //setProcessingSolution(true);
         //handleTimerExpire(); // Maneja la expiración del temporizador
         checkSolution();
+        setSoftReset(true);
       }, 4500);
       setTimer(newTimer);
       Utils.log("Solution: ", password);
@@ -501,7 +502,7 @@ const MainScreen = (props) => {
             </div>
             <SafeBoxDial
                 boxWidth={boxWidth} boxHeight={boxHeight} checking={processingSolution} 
-                rotationAngle={rotationAngle} setRotationAngle={setRotationAngle}
+                rotationAngle={rotationAngle} setRotationAngle={setRotationAngle} softReset={softReset} setSoftReset={setSoftReset}
                 setPassword={setPassword} marginLeft={containerMarginLeft} marginTop={containerMarginTop}/>
           
          <div className="boxLight boxLight_off" style={{ visibility: light === "off" ? "visible" : "hidden", opacity: light === "off" ? "1" : "0", width: lightWidth, height: lightHeight, backgroundImage: 'url("' + appSettings.imageLightOff + '")', left: lightLeft, top: lightTop }} ></div> 

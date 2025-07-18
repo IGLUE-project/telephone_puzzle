@@ -87,7 +87,7 @@ export const DEFAULT_APP_SETTINGS = {
   soundRetract: "sounds/retract.wav",
   soundCalling: "sounds/calling.wav",
   //delaySoundOk: 10000, // Time in milliseconds that the soundOk will be played after the solution is correct
-  soundPostSuccess: "https://youtu.be/Eg4vnZwPWXA?si=IRS1Mrsar-qdd8P3&t=18",//"sounds/post_success.mp3", // Sound played after the solution is correct and the message is shown
+  soundPostSuccess: "sounds/post_success.mp3",//"sounds/post_success.mp3", // Sound played after the solution is correct and the message is shown
 
   dialWidth: 0.7, // Relative size of the dial compared to the box width
   dialHeight: 0.7, // Relative size of the dial compared to the box height

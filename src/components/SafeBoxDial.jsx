@@ -1,6 +1,7 @@
 import './../assets/scss/main.scss';
 import { useState, useEffect, useContext } from 'react';
 import { GlobalContext } from "./GlobalContext";
+import { use } from 'react';
 
 const  SafeBoxDial = ( props ) => {
     const {  appSettings } = useContext(GlobalContext);
@@ -110,11 +111,27 @@ const  SafeBoxDial = ( props ) => {
     const reset = () => {
         setStartAngle(0);
         props.setRotationAngle(0); // Reinicia el ángulo de rotación
+        setIsMouseDown(false);
         //setRotationDirection("");
         setTimeout(() => {      
           setIsReseting(false);
         }, 1300);
     }
+
+    
+    useEffect(() => {
+      if (!props.softReset) return; // Si no se está reiniciando, no hace nada
+      setIsReseting(true); // Indica que se está reiniciando el lock
+      setStartAngle(0);
+      props.setRotationAngle(0); // Reinicia el ángulo de rotación
+      //setRotationDirection("");
+      setTimeout(() => {      
+        //setIsReseting(false);
+        props.setSoftReset(false); // Reinicia el estado de softReset
+        setIsReseting(false); // Reinicia el estado de isReseting
+      }, 1300);
+    }, [props.softReset]); // Se ejecuta cuando softReset cambia
+    
 
     useEffect(() => {    
         if (isReseting) { 
