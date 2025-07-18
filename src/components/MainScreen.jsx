@@ -188,21 +188,27 @@ const MainScreen = (props) => {
     };
     
     if(!telephoneCall) {
-      escapp.checkNextPuzzle(password, {}, (success, erState) => {
-            Utils.log("Check solution Escapp response", success, erState);
-            //audio_calling.onended = () => {
-              try {            
-                //setTimeout(() => {
-                  puzzleCheckedRef.current = true;
-                  resultRef.current = {success, password};
-                  maybeProceed();
-                    //changeBoxLight(success, password);
-                //}, 700);            
-              } catch(e){
-                Utils.log("Error in checkNextPuzzle",e);
-              }
-            //}
-          });
+      if(password.length === appSettings.solutionLength){
+        escapp.checkNextPuzzle(password, {}, (success, erState) => {
+              Utils.log("Check solution Escapp response", success, erState);
+              //audio_calling.onended = () => {
+                try {            
+                  //setTimeout(() => {
+                    puzzleCheckedRef.current = true;
+                    resultRef.current = {success, password};
+                    maybeProceed();
+                      //changeBoxLight(success, password);
+                  //}, 700);            
+                } catch(e){
+                  Utils.log("Error in checkNextPuzzle",e);
+                }
+              //}
+            });
+      }else{
+        puzzleCheckedRef.current = true;
+        resultRef.current = {success: false, password};
+        maybeProceed();
+      }
     }
   }
 
@@ -450,15 +456,29 @@ const MainScreen = (props) => {
   const  reset = () =>{
     setPassword("");
     secondarySolutionRef.current = false;
-    setTimeout(() => {      
+    if (timer) {
+      clearTimeout(timer); // Limpiar el temporizador
+      setTimer(null);
+    }
+    /*setTimeout(() => {      
       setIsReseting(false);
-    }, 2500);
+    }, 2500);*/
   }
 
   useEffect(() => { // Comprueba si se ha alcanzado el número máximo de intentos (En local y en API)           
     //console.log("Tries: ", tries, "Solution: ", solutionArray);
-    if(appSettings.skin === "FUTURISTIC") return;
-      password.length >= appSettings.solutionLength && checkSolution();
+    if(appSettings.skin === "FUTURISTIC" || processingSolution || password.length <= 0) return;
+
+      //password.length >= appSettings.solutionLength && checkSolution();
+      if (timer) {
+        clearTimeout(timer); // Limpia el temporizador anterior
+      }
+      const newTimer = setTimeout(() => {    
+        //setProcessingSolution(true);
+        //handleTimerExpire(); // Maneja la expiración del temporizador
+        checkSolution();
+      }, 4500);
+      setTimer(newTimer);
       Utils.log("Solution: ", password);
   }, [password]);
 

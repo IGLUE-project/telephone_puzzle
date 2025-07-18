@@ -103,8 +103,8 @@ export const DEFAULT_APP_SETTINGS = {
   lightBack: "false", // Controls whether to show the image behind the dial frame
 
   telephoneNumbers: [
-    { number: "1234", src: "sounds/telephone_1234.mp3" },
-    { number: "0987", src: "sounds/telephone_0987.mp3" },
+    { number: "123", src: "sounds/contestador_mensaje.wav" },
+    { number: "111111", src: "sounds/contestador_no_mensaje.wav" },
   ],
 
   //
