@@ -10,7 +10,6 @@ const BoxButton = (props) => {
         return <div className="color"  style={{width:appSettings.fontSize, height:appSettings.fontSize, borderRadius:"50%" ,backgroundColor: appSettings.colors[props.value], marginLeft:"18%"}}/>;
       case "SYMBOLS":
         return <svg viewBox={appSettings.symbolsBackground[props.value].viewBox} style={{marginLeft:"18%"}}  width={appSettings.fontSize} height={appSettings.fontSize} 
-                //fill={appSettings.colors[props.value]}> {/*//appSettings.fontColor}>*/}
                 fill={appSettings.fontColor}>
                 <path d={appSettings.symbolsBackground[props.value].path} />
                 </svg>;

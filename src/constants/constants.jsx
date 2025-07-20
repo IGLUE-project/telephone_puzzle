@@ -7,8 +7,6 @@ export const DEFAULT_APP_SETTINGS = {
   backgroundTelephone : "images/standard/background_telephone2.png",
   backgroundDial: "images/standard/dial_telephone.png",
   backgroundMarker: "images/standard/marker.png",
-  //backgroundKeypad: "images/standard/lock.png",
-  //backgroundKey: "images/standard.png",
   numbers: ["1","2","3","4","5","6","7","8","9","0"],
   letters: ["A","B","C","D","E","F","G","H","I","J"],
   colors : [
@@ -24,20 +22,6 @@ export const DEFAULT_APP_SETTINGS = {
     "Black", //#000000
     //"Gray", //#808080
     //"White", //#FFFFFF
-  ],
-  coloredBackgroundKeys: [
-    "images/background_key_red.png",
-    "images/background_key_green.png",
-    "images/background_key_blue.png",
-    "images/background_key_yellow.png",
-    "images/background_key_orange.png",
-    "images/background_key_pink.png",
-    "images/background_key_cyan.png",
-    "images/background_key_purple.png",
-    "images/background_key_brown.png",
-    "images/background_key.png",
-    "images/background_key_gray.png",
-    "images/background_key_white.png",
   ],
   symbols: [
     "Triangle",
@@ -79,15 +63,12 @@ export const DEFAULT_APP_SETTINGS = {
   imageLightOff: "images/standard/light_off.png",
   imageLightNok: "images/standard/light_nok.png",
   imageLightOk: "images/standard/light_ok.png",
-  //soundBeep: "sounds/beep.mp3",
   soundNok: "sounds/solution_nok.wav",
-  soundOk: "sounds/solution_ok.mp3",//https://www.ivoox.com/japon-en-la-iigm-4-una-medida-extraordinaria_mf_149895750_feed_1.mp3",
-  //soundOk"sounds/solution_ok.mp3",
+  soundOk: "sounds/solution_ok.mp3",
   soundDial: "sounds/spin.wav",
   soundRetract: "sounds/retract.wav",
   soundCalling: "sounds/calling.wav",
-  //delaySoundOk: 10000, // Time in milliseconds that the soundOk will be played after the solution is correct
-  soundPostSuccess: "sounds/post_success.mp3",//"sounds/post_success.mp3", // Sound played after the solution is correct and the message is shown
+  soundPostSuccess: "sounds/post_success.mp3", // Sound played after the solution is correct and the message is shown
 
   dialWidth: 0.7, // Relative size of the dial compared to the box width
   dialHeight: 0.7, // Relative size of the dial compared to the box height
@@ -112,8 +93,6 @@ export const DEFAULT_APP_SETTINGS = {
 
 export const SKIN_SETTINGS_RETRO = {
   background: "images/retro/background.png",
-  //backgroundKeypad: "images/background_telephone.png",
-  //backgroundKey: "images/background_dial.png",
   
   backgroundTelephone : "images/retro/background_telephone.png",
   backgroundDial: "images/retro/background_dial.png",
@@ -154,31 +133,12 @@ export const SKIN_SETTINGS_RETRO = {
 export const SKIN_SETTINGS_FUTURISTIC = {
   background: "images/futuristic/background.png",
   backgroundTelephone : "images/futuristic/background_telephone.png",
-  //backgroundKeypad: "images/background_keypad_futuristic.png",
   backgroundKey: "images/futuristic/button.png",
   backgroundKeyCall: "images/futuristic/button_call.png",
-  //backgroundLock : "images/futuristic/background_lock_futuristic.png",
-  //backgroundDial: "images/futuristic/dial_futuristic.png",
-  coloredBackgroundKeys: [
-    "images/background_key_futuristic_red.png",
-    "images/background_key_futuristic_green.png",
-    "images/background_key_futuristic_blue.png",
-    "images/background_key_futuristic_yellow.png",
-    "images/background_key_futuristic_orange.png",
-    "images/background_key_futuristic_pink.png",
-    "images/background_key_futuristic_cyan.png",
-    "images/background_key_futuristic_purple.png",
-    "images/background_key_futuristic_brown.png",
-    "images/background_key_futuristic_black.png",
-    "images/background_key_futuristic_gray.png",
-    "images/background_key_futuristic_white.png",
-  ],
   backgroundMessage: "images/background_message_futuristic.png",
-  //imageLightOff: "images/futuristic/light_off_futuristic.png",
   imageLightNok: "images/futuristic/light_nok_futuristic.png",
   imageLightOk: "images/futuristic/light_ok_futuristic.png",
   imageLightWaiting: "images/futuristic/light_waiting.png",
-  //soundNok: "sounds/solution_nok_futuristic.wav",
 
   dialTextSize: "9vmin", // Font size for the dial text
   dialTextColor: "#0fbdfd", // Color for the dial text

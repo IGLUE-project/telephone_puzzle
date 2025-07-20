@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import { GlobalContext } from "./GlobalContext";
 import './../assets/scss/main.scss';
-import SafeBoxDial from './SafeBoxDial.jsx';
+import Dial from './Dial.jsx';
 import BoxButton from './BoxButton.jsx';
 import Number from './Number.jsx';
 
 const MainScreen = (props) => {
   const { escapp, appSettings, Utils, I18n } = useContext(GlobalContext);
-  //const [solutionArray, setSolutionArray] = useState([]); // Array para guardar la solución
-  //const [currentSolution, setCurrentSolution] = useState([]);
   const [processingSolution, setProcessingSolution] = useState(false);
   const [light, setLight] = useState("off");
   const [containerWidth, setContainerWidth] = useState(0);//
@@ -42,7 +40,6 @@ const MainScreen = (props) => {
   const [password, setPassword] = useState("");
 
   const secondarySolutionRef = useRef(false); // Array para guardar la solución secundaria
-  const [callTimer, setCallTimer] = useState(null);
   const [timer, setTimer] = useState(0); 
 
   const callingEndedRef = useRef(false);
@@ -114,8 +111,6 @@ const MainScreen = (props) => {
         _containerMarginLeft = _lockWidth * 0.025;
         _telephoneMarginLeft = _lockWidth * 0.02;
         _telephoneMarginTop = _lockHeight * 0.001;
-        //_boxHeight = _lockHeight * 0.;
-        //_boxWidth = _lockWidth * 0.1;
         _containerWidth = _lockWidth * 0.25;
         _containerHeight = _lockHeight *0.61;
         _lightWidth = _containerWidth;
@@ -165,7 +160,7 @@ const MainScreen = (props) => {
 
   const checkSolution = () => {
     setProcessingSolution(true);
-    if(appSettings.skin!=="FUTURISTIC")reset(); // Reinicia el lock
+    if(appSettings.skin!=="FUTURISTIC")reset(); 
     else setLight("on");
     callingEndedRef.current = false;
     puzzleCheckedRef.current = false;
@@ -191,14 +186,10 @@ const MainScreen = (props) => {
       if(password.length === appSettings.solutionLength){
         escapp.checkNextPuzzle(password, {}, (success, erState) => {
               Utils.log("Check solution Escapp response", success, erState);
-              //audio_calling.onended = () => {
                 try {            
-                  //setTimeout(() => {
                     puzzleCheckedRef.current = true;
                     resultRef.current = {success, password};
-                    maybeProceed();
-                      //changeBoxLight(success, password);
-                  //}, 700);            
+                    maybeProceed();         
                 } catch(e){
                   Utils.log("Error in checkNextPuzzle",e);
                 }
@@ -245,15 +236,9 @@ const MainScreen = (props) => {
     }, afterChangeBoxLightDelay);
 
     if(success){
-      //audio_calling.pause();
       audio.play();
-
-      //setTimeout(() => {     
-       // props.onKeypadSolved(solution); //Cambiar
       audio.onended = () => {
         if(appSettings.actionAfterSolve === "PLAY_SOUND"){
-          //let post_success_audio = document.getElementById("audio_post_success");
-          //post_success_audio.currentTime = 0;
           post_success_audio.play();
           post_success_audio.onended = () => {
             props.onKeypadSolved(solution);
@@ -262,10 +247,7 @@ const MainScreen = (props) => {
           props.onKeypadSolved(solution);
         }
       }
-      //}, appSettings.delaySoundOk);
     }else
-      //audio_calling.pause();
-      //audio_calling.play();
       audio.play();
   }
 
@@ -305,7 +287,6 @@ const MainScreen = (props) => {
     }
     buttonSound(value);
     if(password.length>=appSettings.maxNumber) return;
-    //if(password.length>=appSettings.solutionLength) return;
     setPassword(password + value);
     
     
@@ -316,19 +297,16 @@ const MainScreen = (props) => {
     buttonSound(0);
     if(password.length === 0) return;
     setPassword(password.slice(0, -1));
-    //setProcessingSolution(false);
   }
 
   const makeCall = () => {
-    //setProcessingSolution(true);
     if (processingSolution) return;
     
     const shortBeep = document.getElementById("audio_beep");
-      shortBeep.pause();
-      shortBeep.currentTime = 0;
-      shortBeep.play();
+    shortBeep.pause();
+    shortBeep.currentTime = 0;
+    shortBeep.play();
     Utils.log("onClickButton", password);
-    //setPassword("");
     checkSolution();
   }
 
@@ -338,7 +316,6 @@ const MainScreen = (props) => {
     const container = document.querySelector('.telephone_screen');
     const p = pRef.current;
     if (!container || !p) return;
-
   
     const maxFontSize = parseFloat(appSettings.screenFontSize) || 6;
     let fontSize = maxFontSize;
@@ -353,25 +330,10 @@ const MainScreen = (props) => {
 
   const futuristicRender = () => {
     return (<>
-      <div
-        className='telephone_screen'
-        style={{
-          left: telephoneScreenMarginLeft,
-          top: telephoneScreenMarginTop,
-          width: telephoneScreenWidth,
-          height: telephoneScreenHeight,
-          
-        }}>
-        <p
-          ref={pRef}
-          style={{           
-            color: appSettings.screenFontColor,
-            margin: 0,
-            width: "100%",
-            textAlign: "center",
-            whiteSpace: "nowrap",
-          }}
-          id="telephonePassword">
+      <div className='telephone_screen'
+        style={{left: telephoneScreenMarginLeft, top: telephoneScreenMarginTop,
+          width: telephoneScreenWidth, height: telephoneScreenHeight, }}>
+        <p ref={pRef} style={{color: appSettings.screenFontColor, margin: 0, width: "100%", textAlign: "center", whiteSpace: "nowrap",}} id="telephonePassword">
           {password}
         </p>
       </div>
@@ -429,9 +391,7 @@ const MainScreen = (props) => {
       <div style={{ visibility: (light === "ok") ? "visible" : "hidden", opacity: (light === "ok")  ? "1" : "0", transition: "opacity 1s, transform 1s", zIndex:"4", left: callingTextMarginLeft, top: callingTextMarginTop, position:"absolute", justifyContent:"center", display:"flex", width:"100%"}} >
         <p style={{color:appSettings.callingFontColor, fontSize:appSettings.callingFontSize}}>{formatTime(timer)}</p>
       </div>
-      {/*<div className="boxLight boxLight_off" style={{ visibility: light === "off" ? "visible" : "hidden", opacity: light === "off" ? "1" : "0", width: lightWidth, height: lightHeight, backgroundImage: 'url("' + appSettings.imageLightOff + '")', left: lightLeft, top: lightTop }} ></div> 
-      <div className="boxLight boxLight_ok" style={{ visibility: light === "ok" ? "visible" : "hidden", opacity: light === "ok" ? "1" : "0", width: lightWidth, height: lightHeight, backgroundImage: 'url("' + appSettings.imageLightWaiting + '")', left: lightLeft, top: lightTop }} ></div>*/}
-    </>);
+      </>);
   }
 
   function formatTime(seconds) {
@@ -457,25 +417,18 @@ const MainScreen = (props) => {
     setPassword("");
     secondarySolutionRef.current = false;
     if (timer) {
-      clearTimeout(timer); // Limpiar el temporizador
+      clearTimeout(timer); 
       setTimer(null);
     }
-    /*setTimeout(() => {      
-      setIsReseting(false);
-    }, 2500);*/
   }
 
-  useEffect(() => { // Comprueba si se ha alcanzado el número máximo de intentos (En local y en API)           
-    //console.log("Tries: ", tries, "Solution: ", solutionArray);
+  useEffect(() => {           
     if(appSettings.skin === "FUTURISTIC" || processingSolution || password.length <= 0) return;
 
-      //password.length >= appSettings.solutionLength && checkSolution();
       if (timer) {
         clearTimeout(timer); // Limpia el temporizador anterior
       }
       const newTimer = setTimeout(() => {    
-        //setProcessingSolution(true);
-        //handleTimerExpire(); // Maneja la expiración del temporizador
         checkSolution();
         setSoftReset(true);
       }, 4500);
@@ -500,7 +453,7 @@ const MainScreen = (props) => {
               <Number value={8}/>
               <Number value={9}/>
             </div>
-            <SafeBoxDial
+            <Dial
                 boxWidth={boxWidth} boxHeight={boxHeight} checking={processingSolution} 
                 rotationAngle={rotationAngle} setRotationAngle={setRotationAngle} softReset={softReset} setSoftReset={setSoftReset}
                 setPassword={setPassword} marginLeft={containerMarginLeft} marginTop={containerMarginTop}/>
@@ -518,15 +471,10 @@ const MainScreen = (props) => {
         <audio id="audio_call" src={appSettings.soundReset} preload="auto"></audio>
         {appSettings.actionAfterSolve === "PLAY_SOUND" && <audio id="audio_post_success" src={appSettings.soundPostSuccess} preload="auto"></audio>}
 
-        {/* Elementos de audio dinámicos para cada número de teléfono */}
+        
         {appSettings.telephoneNumbers && appSettings.telephoneNumbers.map((telephoneNumber, index) => (
-          telephoneNumber.src && <audio 
-            key={`telephone-audio-${index}`}
-            id={`audio_telephone_${telephoneNumber.number}`} 
-            src={telephoneNumber.src} 
-            preload="auto"
-          ></audio>
-        ))}
+          telephoneNumber.src && <audio  key={`telephone-audio-${index}`} id={`audio_telephone_${telephoneNumber.number}`} 
+            src={telephoneNumber.src} preload="auto"></audio> ))}
     </div>);
 };
 

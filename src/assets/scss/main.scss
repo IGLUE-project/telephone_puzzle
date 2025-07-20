@@ -7,7 +7,6 @@ div#screen_main {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	//z-index: 1;
 	position: relative;
 }
 
@@ -16,16 +15,13 @@ div#keypad {
 	flex-direction: column;
 	justify-content: space-around;
 	position: absolute;
-	row-gap: 155vmin;
 
 }
 
 div#keypad div.row {
 	display: flex;
 	flex-direction: row;
-	//justify-content: space-between;
-	align-items: center;
-	
+	align-items: center;	
 }
 
 div.boxButton {
@@ -68,14 +64,6 @@ div.boxButton div {
 }
 
 
-
-/*div.retro div.boxButton div {
-  padding-top: 0.5px;
-  font-size: 3.5vmin;
-  font-family: 'Retro';
-  font-weight: bold;
-}*/
-
 div.boxLight {
 	position: absolute;
 	background-position: center;
@@ -87,13 +75,6 @@ div.boxLight {
 	border-image: none;
 	pointer-events: none;
 }
-
-/*div.retro div.boxLight {
-	transition: opacity 2.5s ease, visibility ease 2.5s;
-}*/
-
-
-///////
 
 .dialContainer{
 	background-position: center;
@@ -143,7 +124,6 @@ div.pivote{
 .number{
 	font-size:2vmin;
 	color:white;
-	//right: "41%" , top: "40%", 
 	position:absolute; 
 	font-family: "Roboto", sans-serif;
 	pointer-events: none;
