@@ -9,45 +9,34 @@ const MainScreen = (props) => {
   const { escapp, appSettings, Utils, I18n } = useContext(GlobalContext);
   const [processingSolution, setProcessingSolution] = useState(false);
   const [light, setLight] = useState("off");
-  const [containerWidth, setContainerWidth] = useState(0);//
-  const [containerHeight, setContainerHeight] = useState(0);//
-  const [containerMarginTop, setContainerMarginTop] = useState(0);//
-  const [containerMarginLeft, setContainerMarginLeft] = useState(0);//
-
-  const [telephoneMarginLeft, setTelephoneMarginLeft] = useState(0);//
-  const [telephoneMarginTop, setTelephoneMarginTop] = useState(0);//
-
-  const [telephoneScreenWidth, setTelephoneScreenWidth] = useState(0); //
-  const [telephoneScreenHeight, setTelephoneScreenHeight] = useState(0); //
-  const [telephoneScreenMarginLeft, setTelephoneScreenMarginLeft] = useState(0); //
-  const [telephoneScreenMarginTop, setTelephoneScreenMarginTop] = useState(0); //
-
-  const [callingTextMarginLeft, setCallingTextMarginLeft] = useState(0); //
-  const [callingTextMarginTop, setCallingTextMarginTop] = useState(0); //
-
+  const [containerWidth, setContainerWidth] = useState(0);
+  const [containerHeight, setContainerHeight] = useState(0);
+  const [containerMarginTop, setContainerMarginTop] = useState(0);
+  const [containerMarginLeft, setContainerMarginLeft] = useState(0);
+  const [telephoneMarginLeft, setTelephoneMarginLeft] = useState(0);
+  const [telephoneMarginTop, setTelephoneMarginTop] = useState(0);
+  const [telephoneScreenWidth, setTelephoneScreenWidth] = useState(0); 
+  const [telephoneScreenHeight, setTelephoneScreenHeight] = useState(0); 
+  const [telephoneScreenMarginLeft, setTelephoneScreenMarginLeft] = useState(0); 
+  const [telephoneScreenMarginTop, setTelephoneScreenMarginTop] = useState(0); 
+  const [callingTextMarginLeft, setCallingTextMarginLeft] = useState(0); 
+  const [callingTextMarginTop, setCallingTextMarginTop] = useState(0); 
   const [boxWidth, setBoxWidth] = useState(0);
   const [boxHeight, setBoxHeight] = useState(0);
-  const [lightWidth, setLightWidth] = useState(0); //
-  const [lightHeight, setLightHeight] = useState(0); //
-  const [lightLeft, setLightLeft] = useState(0);//
-  const [lightTop, setLightTop] = useState(0);//
-
-  //
+  const [lightWidth, setLightWidth] = useState(0); 
+  const [lightHeight, setLightHeight] = useState(0); 
+  const [lightLeft, setLightLeft] = useState(0);
+  const [lightTop, setLightTop] = useState(0);
+  
   const [rotationAngle, setRotationAngle] = useState(0); // Estado para la rotación
-  const [softReset, setSoftReset] = useState(false); // Estado para saber si se está reiniciando el lock
-
-  //
+  const [softReset, setSoftReset] = useState(false); // Estado para saber si se está reiniciando el lock  
   const [password, setPassword] = useState("");
-
-  const secondarySolutionRef = useRef(false); // Array para guardar la solución secundaria
+  const secondarySolutionRef = useRef(false); 
   const [timer, setTimer] = useState(0); 
-
   const callingEndedRef = useRef(false);
   const puzzleCheckedRef = useRef(false);
   const resultRef = useRef({success: false, password: ""});
-
-  
-//
+ 
 
   useEffect(() => {
     handleResize();
@@ -146,7 +135,6 @@ const MainScreen = (props) => {
     setCallingTextMarginLeft(_callingTextMarginLeft);
     setCallingTextMarginTop(_callingTextMarginTop);
 
-
     setBoxWidth(_boxWidth);
     setBoxHeight(_boxHeight);
 
@@ -192,8 +180,7 @@ const MainScreen = (props) => {
                     maybeProceed();         
                 } catch(e){
                   Utils.log("Error in checkNextPuzzle",e);
-                }
-              //}
+                }              
             });
       }else{
         puzzleCheckedRef.current = true;
@@ -223,8 +210,7 @@ const MainScreen = (props) => {
     } else {
       audio = document.getElementById("audio_failure");
       setLight("nok");
-
-      reset(); //
+      reset(); 
     }
     audio.currentTime = 0;
     setTimeout(() => {
@@ -330,37 +316,36 @@ const MainScreen = (props) => {
 
   const futuristicRender = () => {
     return (<>
-      <div className='telephone_screen'
-        style={{left: telephoneScreenMarginLeft, top: telephoneScreenMarginTop,
+      <div className='telephone_screen' style={{left: telephoneScreenMarginLeft, top: telephoneScreenMarginTop,
           width: telephoneScreenWidth, height: telephoneScreenHeight, }}>
-        <p ref={pRef} style={{color: appSettings.screenFontColor, margin: 0, width: "100%", textAlign: "center", whiteSpace: "nowrap",}} id="telephonePassword">
+        <p className='futuristicPhoneText' ref={pRef} style={{color: appSettings.screenFontColor, }} id="telephonePassword">
           {password}
         </p>
       </div>
       <div className='keypad' id='keypad' style={{ width: containerWidth, height: containerHeight, left: containerMarginLeft, top: containerMarginTop}}>
-        <div id="row1" className="row" style={{position:"absolute", }}>
+        <div id="row1" className="row">
           <BoxButton position={appSettings.keys[1]} value={1} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
           <BoxButton position={appSettings.keys[2]} value={2} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
           <BoxButton position={appSettings.keys[3]} value={3} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
         </div>
-        <div id="row2" className="row" style={{position:"absolute", top: containerHeight*0.55}}>
+        <div id="row2" className="row" style={{top: containerHeight*0.55}}>
           <BoxButton position={appSettings.keys[4]} value={4} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
           <BoxButton position={appSettings.keys[5]} value={5} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
           <BoxButton position={appSettings.keys[6]} value={6} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
         </div>
-        <div id="row3" className="row" style={{position:"absolute", top: containerHeight*0.65}}>
+        <div id="row3" className="row" style={{top: containerHeight*0.65}}>
           <BoxButton position={appSettings.keys[7]} value={7} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
           <BoxButton position={appSettings.keys[8]} value={8} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
           <BoxButton position={appSettings.keys[9]} value={9} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
         </div>
-        <div id="row4" className="row" style={{position:"absolute", top: containerHeight*0.75,}}>
+        <div id="row4" className="row" style={{top: containerHeight*0.75,}}>
           <div style={{width: boxWidth, height: boxHeight}}/>
           <BoxButton position={appSettings.keys[0]} value={0} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />          
           <div className='boxButton' onClick={removeNumber} style={{ cursor:"pointer",width: boxWidth, height: boxHeight, backgroundImage: 'url("' + appSettings.backgroundKey + '")'}}>
             <svg style={{marginLeft:"19%", marginTop:"5%"}} xmlns="http://www.w3.org/2000/svg" height={appSettings.callButonSize} viewBox="0 -960 960 960" width={appSettings.callButtonSize} fill="white"><path d="m456-320 104-104 104 104 56-56-104-104 104-104-56-56-104 104-104-104-56 56 104 104-104 104 56 56Zm-96 160q-19 0-36-8.5T296-192L80-480l216-288q11-15 28-23.5t36-8.5h440q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H360ZM180-480l180 240h440v-480H360L180-480Zm400 0Z"/></svg>
           </div>
         </div>
-        <div id="row5" className="row" style={{position:"absolute", top: containerHeight*0.86,}}>
+        <div id="row5" className="row" style={{top: containerHeight*0.86,}}>
           <div style={{width: boxWidth, height: boxHeight}}/>
           <div className='boxButton' onClick={makeCall} style={{cursor:"pointer",width: boxWidth, height: boxHeight, backgroundImage: 'url("' + appSettings.backgroundKeyCall + '")'}}>
             <svg style={{marginLeft:"19%", marginTop:"5%"}} xmlns="http://www.w3.org/2000/svg" height={appSettings.callButonSize} viewBox="0 -960 960 960" width={appSettings.callButtonSize} fill="white"><path d="M798-120q-125 0-247-54.5T329-329Q229-429 174.5-551T120-798q0-18 12-30t30-12h162q14 0 25 9.5t13 22.5l26 140q2 16-1 27t-11 19l-97 98q20 37 47.5 71.5T387-386q31 31 65 57.5t72 48.5l94-94q9-9 23.5-13.5T670-390l138 28q14 4 23 14.5t9 23.5v162q0 18-12 30t-30 12ZM241-600l66-66-17-94h-89q5 41 14 81t26 79Zm358 358q39 17 79.5 27t81.5 13v-88l-94-19-67 67ZM241-600Zm358 358Z"/></svg>
@@ -379,17 +364,16 @@ const MainScreen = (props) => {
         <audio id="audio_beep8" src={appSettings.soundsBeeps[8]} preload="auto"></audio>
         <audio id="audio_beep9" src={appSettings.soundsBeeps[9]} preload="auto"></audio>
       </div>
-      <div className="boxLight boxLight_on" style={{ visibility: (light === "on" ||  light === "nok" || light === "ok") ? "visible" : "hidden", opacity: (light === "on" || light==="nok" || light==="ok") ? "1" : "0", width: lightWidth, height: lightHeight, backgroundImage: 'url("' + appSettings.imageLightWaiting + '")', left: lightLeft, top: lightTop , transition: "opacity 1s, transform 0.5s",}} ></div> 
-
+      <div className="boxLight boxLight_on" style={{ visibility: (light === "on" ||  light === "nok" || light === "ok") ? "visible" : "hidden", opacity: (light === "on" || light==="nok" || light==="ok") ? "1" : "0", width: lightWidth, height: lightHeight, backgroundImage: 'url("' + appSettings.imageLightWaiting + '")', left: lightLeft, top: lightTop , transition: "opacity 1s, transform 0.5s",}} />
       
       <div style={{ visibility: (light === "on") ? "visible" : "hidden", opacity: (light === "on")  ? "1" : "0",  transition: "opacity 1s, transform 1s", zIndex:"4", left: callingTextMarginLeft, top: callingTextMarginTop, position:"absolute", display: "flex", justifyContent:"center", width:"100%"}} >
-        <p style={{color:appSettings.callingFontColor, fontSize:appSettings.callingFontSize}}>{I18n.getTrans("i.calling")}<span className="dot-ellipsis"></span></p>
+        <p style={{color:appSettings.callingFontColor, fontSize:containerWidth*appSettings.callingFontSize+"px"}}>{I18n.getTrans("i.calling")}<span className="dot-ellipsis"></span></p>
       </div>
       <div style={{ visibility: (light === "nok") ? "visible" : "hidden", opacity: (light === "nok")  ? "1" : "0",  transition: "opacity 1s, transform 1s", zIndex:"4", left: callingTextMarginLeft, top: callingTextMarginTop, position:"absolute", justifyContent:"center", display:"flex", width:"100%"}} >
-        <p style={{color:appSettings.callingFontColor, fontSize:appSettings.callingFontSize}}>{I18n.getTrans("i.noResponse")}</p>
+        <p style={{color:appSettings.callingFontColor, fontSize:containerWidth*appSettings.callingFontSize+"px"}}>{I18n.getTrans("i.noResponse")}</p>
       </div>
       <div style={{ visibility: (light === "ok") ? "visible" : "hidden", opacity: (light === "ok")  ? "1" : "0", transition: "opacity 1s, transform 1s", zIndex:"4", left: callingTextMarginLeft, top: callingTextMarginTop, position:"absolute", justifyContent:"center", display:"flex", width:"100%"}} >
-        <p style={{color:appSettings.callingFontColor, fontSize:appSettings.callingFontSize}}>{formatTime(timer)}</p>
+        <p style={{color:appSettings.callingFontColor, fontSize:containerWidth*appSettings.callingFontSize+"px"}}>{formatTime(timer)}</p>
       </div>
       </>);
   }
@@ -399,7 +383,6 @@ const MainScreen = (props) => {
     const ss = String(seconds % 60).padStart(2, '0');
     return `${mm}:${ss}`;
   }
-
 
   useEffect(() => {
     let interval;
@@ -424,7 +407,6 @@ const MainScreen = (props) => {
 
   useEffect(() => {           
     if(appSettings.skin === "FUTURISTIC" || processingSolution || password.length <= 0) return;
-
       if (timer) {
         clearTimeout(timer); // Limpia el temporizador anterior
       }
@@ -458,20 +440,17 @@ const MainScreen = (props) => {
                 rotationAngle={rotationAngle} setRotationAngle={setRotationAngle} softReset={softReset} setSoftReset={setSoftReset}
                 setPassword={setPassword} marginLeft={containerMarginLeft} marginTop={containerMarginTop}/>
           
-         <div className="boxLight boxLight_off" style={{ visibility: light === "off" ? "visible" : "hidden", opacity: light === "off" ? "1" : "0", width: lightWidth, height: lightHeight, backgroundImage: 'url("' + appSettings.imageLightOff + '")', left: lightLeft, top: lightTop }} ></div> 
+        <div className="boxLight boxLight_off" style={{ visibility: light === "off" ? "visible" : "hidden", opacity: light === "off" ? "1" : "0", width: lightWidth, height: lightHeight, backgroundImage: 'url("' + appSettings.imageLightOff + '")', left: lightLeft, top: lightTop }} ></div> 
         <div className="boxLight boxLight_nok" style={{ visibility: light === "nok" ? "visible" : "hidden", opacity: light === "nok" ? "1" : "0", width: lightWidth, height: lightHeight, backgroundImage: 'url("' + appSettings.imageLightNok + '")', left: lightLeft, top: lightTop }} ></div> 
         <div className="boxLight boxLight_ok" style={{ visibility: light === "ok" ? "visible" : "hidden", opacity: light === "ok" ? "1" : "0", width: lightWidth, height: lightHeight, backgroundImage: 'url("' + appSettings.imageLightOk + '")', left: lightLeft, top: lightTop }} ></div>
           </>}
-      </div>
-        
+      </div>     
 
         <audio id="audio_success" src={appSettings.soundOk} preload="auto"></audio>
         <audio id="audio_failure" src={appSettings.soundNok} preload="auto"></audio>
         <audio id="audio_calling" src={appSettings.soundCalling} preload="auto"></audio>
         <audio id="audio_call" src={appSettings.soundReset} preload="auto"></audio>
-        {appSettings.actionAfterSolve === "PLAY_SOUND" && <audio id="audio_post_success" src={appSettings.soundPostSuccess} preload="auto"></audio>}
-
-        
+        {appSettings.actionAfterSolve === "PLAY_SOUND" && <audio id="audio_post_success" src={appSettings.soundPostSuccess} preload="auto"></audio>}        
         {appSettings.telephoneNumbers && appSettings.telephoneNumbers.map((telephoneNumber, index) => (
           telephoneNumber.src && <audio  key={`telephone-audio-${index}`} id={`audio_telephone_${telephoneNumber.number}`} 
             src={telephoneNumber.src} preload="auto"></audio> ))}

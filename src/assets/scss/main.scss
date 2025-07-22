@@ -22,6 +22,7 @@ div#keypad div.row {
 	display: flex;
 	flex-direction: row;
 	align-items: center;	
+	position: absolute;
 }
 
 div.boxButton {
@@ -29,19 +30,16 @@ div.boxButton {
 	background-repeat: no-repeat;
 	background-size: contain;
 	display: flex;
-	color: white;;
+	color: white;
+	transition: transform 0.1s ease-in-out filter 0.1s ease-in-out;
 }
 
 div.boxButton:active {
 	transform: scale(0.9);
 }
 
-div.retro div.boxButton {
-  transition: transform 0.4s ease;
-}
-
-div.retro div.boxButton:active {
-	transform: scale(0.85);
+div.boxButton:hover {
+	filter: brightness(1.5);
 }
 
 div.boxButton div {
@@ -82,7 +80,7 @@ div.boxLight {
 	background-size: contain;
 	display: flex;
 	position: absolute;
-	transform: (-50%, - 50px); // Centra el lock en la pantalla
+	transform: (-50%, - 50px); 
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
@@ -94,7 +92,7 @@ div.boxLight {
 	background-size: contain;
 	display: flex;
 	position: absolute;
-	transform: (-50%, - 50px); // Centra el lock en la pantalla
+	transform: (-50%, - 50px); 
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -111,7 +109,6 @@ div.boxLight {
 	position: absolute;
 	cursor: pointer;
 }
-//
 
 div.pivote{
 	background-position: center;
@@ -160,4 +157,11 @@ div.pivote{
   33%  { content: '.'; }
   66%  { content: '..'; }
   100% { content: '...'; }
+}
+
+.futuristicPhoneText{
+	margin: 0;
+	width: 100%;
+	text-align: center;
+	white-space: nowrap;
 }

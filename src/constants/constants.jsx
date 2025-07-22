@@ -4,9 +4,10 @@ export const DEFAULT_APP_SETTINGS = {
   message: undefined,
   keysType: "NUMBERS",
   background: "images/standard/background.png",
-  backgroundTelephone : "images/standard/background_telephone2.png",
+  backgroundTelephone : "images/standard/background_telephone.png",
   backgroundDial: "images/standard/dial_telephone.png",
   backgroundMarker: "images/standard/marker.png",
+  backgroundMessage: "images/standard/background_message.png",
   numbers: ["1","2","3","4","5","6","7","8","9","0"],
   letters: ["A","B","C","D","E","F","G","H","I","J"],
   colors : [
@@ -20,8 +21,6 @@ export const DEFAULT_APP_SETTINGS = {
     "Purple", //#800080
     "Brown", //#8B4513
     "Black", //#000000
-    //"Gray", //#808080
-    //"White", //#FFFFFF
   ],
   symbols: [
     "Triangle",
@@ -59,7 +58,6 @@ export const DEFAULT_APP_SETTINGS = {
     {top: "59.9%", right: "49%"},
     {top: "58.7%", right: "44.2%"},
   ],
-  backgroundMessage: "images/background_message.png",
   imageLightOff: "images/standard/light_off.png",
   imageLightNok: "images/standard/light_nok.png",
   imageLightOk: "images/standard/light_ok.png",
@@ -69,51 +67,35 @@ export const DEFAULT_APP_SETTINGS = {
   soundRetract: "sounds/retract.wav",
   soundCalling: "sounds/calling.wav",
   soundPostSuccess: "sounds/post_success.mp3", // Sound played after the solution is correct and the message is shown
-
   dialWidth: 0.7, // Relative size of the dial compared to the box width
   dialHeight: 0.7, // Relative size of the dial compared to the box height
   dialTextSize: "9vmin", // Font size for the dial text
   dialTextColor: "#000000", // Color for the dial text
-
   angleMultiplier: 30, // Angle multiplier to divide the dial into 10 parts
   initialAngle: 50, // Initial angle of the dial in degrees
-
   fontSize : "6vmin", // Font size for the numbers, letters, colors, or symbols
   fontColor: "#FFFFFF", // Color for the numbers, letters, colors, or symbols
-
-  lightBack: "false", // Controls whether to show the image behind the dial frame
-
   telephoneNumbers: [
     { number: "123", src: "sounds/contestador_mensaje.wav" },
     { number: "111111", src: "sounds/contestador_no_mensaje.wav" },
   ],
 
-  //
 };
 
 export const SKIN_SETTINGS_RETRO = {
-  background: "images/retro/background.png",
-  
+  background: "images/retro/background.png",  
   backgroundTelephone : "images/retro/background_telephone.png",
   backgroundDial: "images/retro/background_dial.png",
-
-  backgroundMessage: "images/background_message_retro.png",
+  backgroundMessage: "images/retro/background.png",
   imageLightOff: "images/retro/light_off.png",
   imageLightNok: "images/retro/light_nok.png",
   imageLightOk: "images/retro/light_ok.png",
-
-
   fontSize : "5vmin", // Font size for the numbers, letters, colors, or symbols
   dialTextColor: "#FFFFFF", // Color for the dial text
-  lightBack: "false",
-
   angleMultiplier: 30, // Angle multiplier to divide the dial into 10 parts
   initialAngle: 50, // Initial angle of the dial in degrees
-
   dialWidth: 0.25, // Relative size of the dial compared to the box width
   dialHeight: 0.25, // Relative size of the dial compared to the box height
-
-
   numbersPosition:[
     {top: "46.5%", right: "37.7%"},
     {top: "42%", right: "42%"},
@@ -126,8 +108,6 @@ export const SKIN_SETTINGS_RETRO = {
     {top: "68.5%", right: "46.7%"},
     {top: "67%", right: "41.8%"},
   ],
-  
-
 };
 
 export const SKIN_SETTINGS_FUTURISTIC = {
@@ -135,15 +115,12 @@ export const SKIN_SETTINGS_FUTURISTIC = {
   backgroundTelephone : "images/futuristic/background_telephone.png",
   backgroundKey: "images/futuristic/button.png",
   backgroundKeyCall: "images/futuristic/button_call.png",
-  backgroundMessage: "images/background_message_futuristic.png",
+  backgroundMessage: "images/futuristic/background_message_futuristic.png",
   imageLightNok: "images/futuristic/light_nok_futuristic.png",
   imageLightOk: "images/futuristic/light_ok_futuristic.png",
   imageLightWaiting: "images/futuristic/light_waiting.png",
-
   dialTextSize: "9vmin", // Font size for the dial text
   dialTextColor: "#0fbdfd", // Color for the dial text
-  lightBack:"true", //Para controlar si se muestra la imagen tras el marco del dial
-
   fontSize : "5vmin", // Font size for the numbers, letters, colors, or symbols
   fontColor: "#FFFFFF",
   soundBeep: "sounds/beep.wav",
@@ -161,11 +138,9 @@ export const SKIN_SETTINGS_FUTURISTIC = {
   ],    
   screenFontSize: 5, // Font size for the screen text
   screenFontColor: "#0fbdfd", // Color for the screen text
-
   callButtonSize: "4.5vmin", // Size of the call button
   maxNumber: 15, // Maximum number of digits in the call input
-
-  callingFontSize: "4vmin", // Font size for the calling text
+  callingFontSize: 0.1, // Font size for the calling text
   callingFontColor: "white", // Color for the calling text
 };
 
