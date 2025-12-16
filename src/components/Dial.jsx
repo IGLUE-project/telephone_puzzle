@@ -5,16 +5,16 @@ import { GlobalContext } from "./GlobalContext";
 const  Dial = ( props ) => {
     const {  appSettings } = useContext(GlobalContext);
     const [initialRotation, setInitialRotation] = useState(0); // Ángulo inicial del lock
-    const [isMouseDown, setIsMouseDown] = useState(false); // Estado para saber si el mouse está presionado
     const [startAngle, setStartAngle] = useState(0); // Ángulo inicial del ratón
     const [rotationDirection, setRotationDirection] = useState(""); 
     const [isReseting, setIsReseting] = useState(false);
 
 
     const handleMouseMove = (event) => {
-        if (!isMouseDown || props.checking) return ;   
-        let audio  = document.getElementById("audio_wheel");
+        if (!props.isMouseDown || props.checking) return ;   
         let rounded = calculateAngle(event); 
+        if (rounded >= 30 && rounded <= 40) handleMouseUp(); //No permite pasar por el tope
+        let audio  = document.getElementById("audio_wheel");
         const angleDifference = normalizeAngleDifference(rounded - startAngle);
         const newRotation = normalizeAngle(initialRotation + angleDifference);
         const rotationDir = getRotationDirection(props.rotationAngle/6, newRotation/6);
@@ -33,7 +33,7 @@ const  Dial = ( props ) => {
 
     const handleMouseUp = () => {
         if (props.checking) return ;
-        setIsMouseDown(false); 
+        props.setIsMouseDown(false); 
         let audio  = document.getElementById("audio_return");
         if(props.rotationAngle>0){
           setIsReseting(true);
@@ -66,7 +66,7 @@ const  Dial = ( props ) => {
 
     const handleMouseDown = (event) => {
         if (props.checking) return ;
-        setIsMouseDown(true); 
+        props.setIsMouseDown(true); 
         let rounded = calculateAngle(event); 
         setStartAngle(rounded);     
         setInitialRotation(props.rotationAngle);   
@@ -100,7 +100,7 @@ const  Dial = ( props ) => {
     const reset = () => {
         setStartAngle(0);
         props.setRotationAngle(0); // Reinicia el ángulo de rotación
-        setIsMouseDown(false);
+        props.setIsMouseDown(false);
         setTimeout(() => {      
           setIsReseting(false);
         }, 1300);

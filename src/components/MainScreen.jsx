@@ -31,6 +31,7 @@ const MainScreen = (props) => {
   const [rotationAngle, setRotationAngle] = useState(0); // Estado para la rotación
   const [softReset, setSoftReset] = useState(false); // Estado para saber si se está reiniciando el lock  
   const [password, setPassword] = useState("");
+  const [isMouseDown, setIsMouseDown] = useState(false);
   const secondarySolutionRef = useRef(false); 
   const [timer, setTimer] = useState(0); 
   const callingEndedRef = useRef(false);
@@ -405,18 +406,20 @@ const MainScreen = (props) => {
     }
   }
 
-  useEffect(() => {           
+  useEffect(() => {
     if(appSettings.skin === "FUTURISTIC" || processingSolution || password.length <= 0) return;
-      if (timer) {
-        clearTimeout(timer); // Limpia el temporizador anterior
-      }
+    if (timer) {
+      clearTimeout(timer); 
+    }
+    if(!isMouseDown) {
       const newTimer = setTimeout(() => {    
         checkSolution();
         setSoftReset(true);
       }, 4500);
       setTimer(newTimer);
       Utils.log("Solution: ", password);
-  }, [password]);
+    }
+  }, [isMouseDown]);
 
   return (
     <div id="screen_main" className={"screen_content"} style={{ backgroundImage: backgroundImage }}>
@@ -438,7 +441,7 @@ const MainScreen = (props) => {
             <Dial
                 boxWidth={boxWidth} boxHeight={boxHeight} checking={processingSolution} 
                 rotationAngle={rotationAngle} setRotationAngle={setRotationAngle} softReset={softReset} setSoftReset={setSoftReset}
-                setPassword={setPassword} marginLeft={containerMarginLeft} marginTop={containerMarginTop}/>
+                setPassword={setPassword} marginLeft={containerMarginLeft} marginTop={containerMarginTop} isMouseDown={isMouseDown} setIsMouseDown={setIsMouseDown}/>
           
         <div className="boxLight boxLight_off" style={{ visibility: light === "off" ? "visible" : "hidden", opacity: light === "off" ? "1" : "0", width: lightWidth, height: lightHeight, backgroundImage: 'url("' + appSettings.imageLightOff + '")', left: lightLeft, top: lightTop }} ></div> 
         <div className="boxLight boxLight_nok" style={{ visibility: light === "nok" ? "visible" : "hidden", opacity: light === "nok" ? "1" : "0", width: lightWidth, height: lightHeight, backgroundImage: 'url("' + appSettings.imageLightNok + '")', left: lightLeft, top: lightTop }} ></div> 

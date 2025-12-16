@@ -11,3 +11,10 @@ div.screen_wrapper.active {
   visibility: visible;
   pointer-events: auto;
 }
+
+* {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
