@@ -31,6 +31,7 @@ const MainScreen = (props) => {
   const [rotationAngle, setRotationAngle] = useState(0); // Estado para la rotación
   const [softReset, setSoftReset] = useState(false); // Estado para saber si se está reiniciando el lock  
   const [password, setPassword] = useState("");
+  const [dialedNumber, setDialedNumber] = useState("");
   const [isMouseDown, setIsMouseDown] = useState(false);
   const secondarySolutionRef = useRef(false); 
   const [timer, setTimer] = useState(0); 
@@ -153,7 +154,23 @@ const MainScreen = (props) => {
     else setLight("on");
     callingEndedRef.current = false;
     puzzleCheckedRef.current = false;
-    const solution = password.split("").join(";");
+    let mapArray = null;
+    switch(appSettings.keysType){
+      case "COLORS": mapArray = appSettings.colors; break;
+      case "SYMBOLS": mapArray = appSettings.symbols; break;
+      case "LETTERS": mapArray = appSettings.letters; break;
+    }
+
+    const solution = password.split("").map(d => {
+      if (mapArray) {
+        let index = parseInt(d); 
+        if (index === 0) index = 9;
+        else index = index - 1;
+        return mapArray[index];
+      }
+      return d;
+    }).join(";");
+
     Utils.log("Check solution", solution);
     
     const audio_calling = document.getElementById("audio_calling");
@@ -314,15 +331,56 @@ const MainScreen = (props) => {
       fontSize -= 0.2;
       p.style.fontSize = fontSize + "vmin";
     }
+    setDialedNumber(password);
   }, [password, appSettings.screenFontSize, telephoneScreenWidth]);
+
+  const renderPasswordContent = () => {
+    if(!password) return null;
+    return password.split('').map((char, i) => {
+      let index = parseInt(char);
+      if(isNaN(index)) return <span key={i}>{char}</span>; 
+      if (index === 0) index = 9;
+      else index = index - 1;
+
+      switch(appSettings.keysType) {
+        case "COLORS":
+             return <div key={i} style={{
+                border: "1px solid #fff",
+                display: 'inline-block',
+                width: '0.6em', 
+                height: '0.6em', 
+                borderRadius: '50%', 
+                backgroundColor: appSettings.colors[index],
+                margin: '0 0.05em',
+                verticalAlign: 'middle'
+             }}/>;
+        case "SYMBOLS":
+            return <svg key={i} viewBox={appSettings.symbolsBackground[index].viewBox} 
+                    style={{
+                        display: 'inline-block',
+                        width: '0.8em',
+                        height: '0.8em',
+                        fill: appSettings.screenFontColor,
+                         verticalAlign: 'middle',
+                         margin: '0 0.05em'
+                    }}>
+                    <path d={appSettings.symbolsBackground[index].path} />
+                   </svg>;
+        case "LETTERS":
+            return <span key={i}>{appSettings.letters[index]}</span>;
+        default:
+            return <span key={i}>{char}</span>;
+      }
+    });
+  };
 
   const futuristicRender = () => {
     return (<>
       <div className='telephone_screen' style={{left: telephoneScreenMarginLeft, top: telephoneScreenMarginTop,
           width: telephoneScreenWidth, height: telephoneScreenHeight, }}>
-        <p className='futuristicPhoneText' ref={pRef} style={{color: appSettings.screenFontColor, }} id="telephonePassword">
-          {password}
-        </p>
+        <div className='futuristicPhoneText' ref={pRef} style={{color: appSettings.screenFontColor, }} id="telephonePassword">
+          {renderPasswordContent()}
+        </div>
       </div>
       <div className='keypad' id='keypad' style={{ width: containerWidth, height: containerHeight, left: containerMarginLeft, top: containerMarginTop}}>
         <div id="row1" className="row">
@@ -342,7 +400,7 @@ const MainScreen = (props) => {
         </div>
         <div id="row4" className="row" style={{top: containerHeight*0.75,}}>
           <div style={{width: boxWidth, height: boxHeight}}/>
-          <BoxButton position={appSettings.keys[0]} value={0} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} containerWidth={containerWidth}/>          
+          <BoxButton position={appSettings.keys[0]} value={10} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} containerWidth={containerWidth}/>          
           <div className='boxButton' onClick={removeNumber} style={{ cursor:"pointer",width: boxWidth, height: boxHeight, backgroundImage: 'url("' + appSettings.backgroundKey + '")'}}>
             <svg xmlns="http://www.w3.org/2000/svg" height={appSettings.callButonSize} viewBox="0 -960 960 960" width={appSettings.callButtonSize} fill="white"><path d="m456-320 104-104 104 104 56-56-104-104 104-104-56-56-104 104-104-104-56 56 104 104-104 104 56 56Zm-96 160q-19 0-36-8.5T296-192L80-480l216-288q11-15 28-23.5t36-8.5h440q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H360ZM180-480l180 240h440v-480H360L180-480Zm400 0Z"/></svg>
           </div>
