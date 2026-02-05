@@ -37,7 +37,7 @@ const MainScreen = (props) => {
   const callingEndedRef = useRef(false);
   const puzzleCheckedRef = useRef(false);
   const resultRef = useRef({success: false, solution: ""});
- 
+  const telephoneRef = useRef(null);
 
   useEffect(() => {
     handleResize();
@@ -326,31 +326,31 @@ const MainScreen = (props) => {
       </div>
       <div className='keypad' id='keypad' style={{ width: containerWidth, height: containerHeight, left: containerMarginLeft, top: containerMarginTop}}>
         <div id="row1" className="row">
-          <BoxButton position={appSettings.keys[1]} value={1} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
-          <BoxButton position={appSettings.keys[2]} value={2} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
-          <BoxButton position={appSettings.keys[3]} value={3} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
+          <BoxButton position={appSettings.keys[1]} value={1} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} containerWidth={containerWidth}/>
+          <BoxButton position={appSettings.keys[2]} value={2} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} containerWidth={containerWidth}/>
+          <BoxButton position={appSettings.keys[3]} value={3} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} containerWidth={containerWidth}/>
         </div>
         <div id="row2" className="row" style={{top: containerHeight*0.55}}>
-          <BoxButton position={appSettings.keys[4]} value={4} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
-          <BoxButton position={appSettings.keys[5]} value={5} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
-          <BoxButton position={appSettings.keys[6]} value={6} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
+          <BoxButton position={appSettings.keys[4]} value={4} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} containerWidth={containerWidth}/>
+          <BoxButton position={appSettings.keys[5]} value={5} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} containerWidth={containerWidth}/>
+          <BoxButton position={appSettings.keys[6]} value={6} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} containerWidth={containerWidth}/>
         </div>
         <div id="row3" className="row" style={{top: containerHeight*0.65}}>
-          <BoxButton position={appSettings.keys[7]} value={7} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
-          <BoxButton position={appSettings.keys[8]} value={8} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
-          <BoxButton position={appSettings.keys[9]} value={9} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
+          <BoxButton position={appSettings.keys[7]} value={7} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} containerWidth={containerWidth}/>
+          <BoxButton position={appSettings.keys[8]} value={8} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} containerWidth={containerWidth}/>
+          <BoxButton position={appSettings.keys[9]} value={9} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} containerWidth={containerWidth}/>
         </div>
         <div id="row4" className="row" style={{top: containerHeight*0.75,}}>
           <div style={{width: boxWidth, height: boxHeight}}/>
-          <BoxButton position={appSettings.keys[0]} value={0} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />          
+          <BoxButton position={appSettings.keys[0]} value={0} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} containerWidth={containerWidth}/>          
           <div className='boxButton' onClick={removeNumber} style={{ cursor:"pointer",width: boxWidth, height: boxHeight, backgroundImage: 'url("' + appSettings.backgroundKey + '")'}}>
-            <svg style={{marginLeft:"19%", marginTop:"5%"}} xmlns="http://www.w3.org/2000/svg" height={appSettings.callButonSize} viewBox="0 -960 960 960" width={appSettings.callButtonSize} fill="white"><path d="m456-320 104-104 104 104 56-56-104-104 104-104-56-56-104 104-104-104-56 56 104 104-104 104 56 56Zm-96 160q-19 0-36-8.5T296-192L80-480l216-288q11-15 28-23.5t36-8.5h440q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H360ZM180-480l180 240h440v-480H360L180-480Zm400 0Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" height={appSettings.callButonSize} viewBox="0 -960 960 960" width={appSettings.callButtonSize} fill="white"><path d="m456-320 104-104 104 104 56-56-104-104 104-104-56-56-104 104-104-104-56 56 104 104-104 104 56 56Zm-96 160q-19 0-36-8.5T296-192L80-480l216-288q11-15 28-23.5t36-8.5h440q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H360ZM180-480l180 240h440v-480H360L180-480Zm400 0Z"/></svg>
           </div>
         </div>
         <div id="row5" className="row" style={{top: containerHeight*0.86,}}>
           <div style={{width: boxWidth, height: boxHeight}}/>
           <div className='boxButton' onClick={makeCall} style={{cursor:"pointer",width: boxWidth, height: boxHeight, backgroundImage: 'url("' + appSettings.backgroundKeyCall + '")'}}>
-            <svg style={{marginLeft:"19%", marginTop:"5%"}} xmlns="http://www.w3.org/2000/svg" height={appSettings.callButonSize} viewBox="0 -960 960 960" width={appSettings.callButtonSize} fill="white"><path d="M798-120q-125 0-247-54.5T329-329Q229-429 174.5-551T120-798q0-18 12-30t30-12h162q14 0 25 9.5t13 22.5l26 140q2 16-1 27t-11 19l-97 98q20 37 47.5 71.5T387-386q31 31 65 57.5t72 48.5l94-94q9-9 23.5-13.5T670-390l138 28q14 4 23 14.5t9 23.5v162q0 18-12 30t-30 12ZM241-600l66-66-17-94h-89q5 41 14 81t26 79Zm358 358q39 17 79.5 27t81.5 13v-88l-94-19-67 67ZM241-600Zm358 358Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" height={appSettings.callButonSize} viewBox="0 -960 960 960" width={appSettings.callButtonSize} fill="white"><path d="M798-120q-125 0-247-54.5T329-329Q229-429 174.5-551T120-798q0-18 12-30t30-12h162q14 0 25 9.5t13 22.5l26 140q2 16-1 27t-11 19l-97 98q20 37 47.5 71.5T387-386q31 31 65 57.5t72 48.5l94-94q9-9 23.5-13.5T670-390l138 28q14 4 23 14.5t9 23.5v162q0 18-12 30t-30 12ZM241-600l66-66-17-94h-89q5 41 14 81t26 79Zm358 358q39 17 79.5 27t81.5 13v-88l-94-19-67 67ZM241-600Zm358 358Z"/></svg>
           </div>
 
         </div>
@@ -424,20 +424,13 @@ const MainScreen = (props) => {
 
   return (
     <div id="screen_main" className={"screen_content"} style={{ backgroundImage: backgroundImage }}>
-      <div id="telephoneContainer" className="telephoneContainer" 
+      <div id="telephoneContainer" className="telephoneContainer" ref={telephoneRef} 
         style={{backgroundImage: 'url('+appSettings.backgroundTelephone+')', width: containerWidth, height: containerHeight, top: telephoneMarginTop, left: telephoneMarginLeft, position:"relative" }}>
           {appSettings.skin==="FUTURISTIC" ? futuristicRender() : <>
             <div className='numbersContainer' style={{ width: boxWidth, height: boxHeight, }}>
-              <Number value={0}/>
-              <Number value={1}/>
-              <Number value={2}/>
-              <Number value={3}/>
-              <Number value={4}/>
-              <Number value={5}/>
-              <Number value={6}/>
-              <Number value={7}/>
-              <Number value={8}/>
-              <Number value={9}/>
+              {appSettings.numbers.map((number, index) => (
+                <Number key={index} value={index} containerWidth={containerWidth}/>
+              ))}
             </div>
             <Dial
                 boxWidth={boxWidth} boxHeight={boxHeight} checking={processingSolution} 

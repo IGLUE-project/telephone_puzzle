@@ -2,13 +2,14 @@ import { useContext } from 'react';
 import { GlobalContext } from "./GlobalContext";
 const Number = (props) => {
     const {appSettings} = useContext(GlobalContext);
+    const numberSize = props.containerWidth * 0.042;
     const renderContent = () => {
     switch (appSettings.keysType) {
         case "COLORS":
-            return <div className="color"  style={{width:appSettings.fontSize, height:appSettings.fontSize, borderRadius:"50%" ,backgroundColor: appSettings.colors[props.value], marginLeft:"25%"}}/>;
+            return <div className="color"  style={{width:appSettings.fontSize, height:appSettings.fontSize, borderRadius:"50%" ,backgroundColor: appSettings.colors[props.value], }}/>;
         case "SYMBOLS":
-            return <svg viewBox={appSettings.symbolsBackground[props.value].viewBox} style={{marginLeft:"25%"}}                width={appSettings.fontSize} height={appSettings.fontSize} 
-                fill={appSettings.colors[props.value]}> {/*//appSettings.fontColor}>*/}
+            return <svg viewBox={appSettings.symbolsBackground[props.value].viewBox} height={"70%"} width={"70%"} 
+                fill={appSettings.fontColor}> {/*//appSettings.fontColor}>*/}
                 <path d={appSettings.symbolsBackground[props.value].path} />
                 </svg>
         case "LETTERS":
@@ -21,7 +22,7 @@ const Number = (props) => {
     };
     return (
         
-            <div className='number' style={{fontSize: appSettings.fontSize, color:appSettings.fontColor, right:appSettings.numbersPosition[props.value].right , top: appSettings.numbersPosition[props.value].top, position:"absolute"}}>
+            <div className='number' style={{ height: numberSize, width: numberSize, fontSize: appSettings.fontSize, color:appSettings.fontColor, right:appSettings.numbersPosition[props.value].right , top: appSettings.numbersPosition[props.value].top, position:"absolute"}}>
               {renderContent()}
             </div>
           

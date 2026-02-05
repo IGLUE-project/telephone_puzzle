@@ -4,12 +4,13 @@ import { GlobalContext } from "./GlobalContext";
 const BoxButton = (props) => {
   const {  appSettings } = useContext(GlobalContext);
 
+  const numberSize = props.containerWidth * 0.042;
   const renderContent = () => {
     switch (appSettings.keysType) {
       case "COLORS":
-        return <div className="color"  style={{width:appSettings.fontSize, height:appSettings.fontSize, borderRadius:"50%" ,backgroundColor: appSettings.colors[props.value], marginLeft:"18%"}}/>;
+        return <div className="color"  style={{width:appSettings.fontSize, height:appSettings.fontSize, borderRadius:"50%" ,backgroundColor: appSettings.colors[props.value], }}/>;
       case "SYMBOLS":
-        return <svg viewBox={appSettings.symbolsBackground[props.value].viewBox} style={{marginLeft:"18%"}}  width={appSettings.fontSize} height={appSettings.fontSize} 
+        return <svg viewBox={appSettings.symbolsBackground[props.value].viewBox}  width={'65%'} height={'65%'} 
                 fill={appSettings.fontColor}>
                 <path d={appSettings.symbolsBackground[props.value].path} />
                 </svg>;

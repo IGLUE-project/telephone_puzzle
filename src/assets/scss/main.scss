@@ -33,6 +33,10 @@ div.boxButton {
 	display: flex;
 	color: white;
 	transition: transform 0.1s ease-in-out filter 0.1s ease-in-out;
+	border-radius: 50%; 
+	display: flex; 
+	justify-content: center; 
+	align-items: center;
 }
 
 div.boxButton:active {
@@ -60,6 +64,7 @@ div.boxButton div {
   -ms-user-select: none; 
   user-select: none;
   cursor: pointer; 
+  align-items: center;
 }
 
 
@@ -125,6 +130,10 @@ div.pivote{
 	position:absolute; 
 	font-family: "Roboto", sans-serif;
 	pointer-events: none;
+	border-radius: 50%; 
+	display: flex; 
+	justify-content: center; 
+	align-items: center;
 }
 
 .numberContainer{
