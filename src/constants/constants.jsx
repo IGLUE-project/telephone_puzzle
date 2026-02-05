@@ -76,7 +76,7 @@ export const DEFAULT_APP_SETTINGS = {
   fontSize : "6vmin", // Font size for the numbers, letters, colors, or symbols
   fontColor: "#FFFFFF", // Color for the numbers, letters, colors, or symbols
   telephoneNumbers: [
-    { number: "123", src: "sounds/contestador_mensaje.wav" },
+    { number: "1234", src: "sounds/contestador_mensaje.wav" },
     { number: "111111", src: "sounds/contestador_no_mensaje.wav" },
   ],
 

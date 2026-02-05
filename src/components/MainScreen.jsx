@@ -153,7 +153,8 @@ const MainScreen = (props) => {
     else setLight("on");
     callingEndedRef.current = false;
     puzzleCheckedRef.current = false;
-    Utils.log("Check solution", password);
+    const solution = password.split("").join(";");
+    Utils.log("Check solution", solution);
     
     const audio_calling = document.getElementById("audio_calling");
     audio_calling.play();
@@ -161,7 +162,7 @@ const MainScreen = (props) => {
     const telephoneCall = appSettings.telephoneNumbers.find((telephoneNumber) => telephoneNumber.number === password);
     if (telephoneCall) {
       puzzleCheckedRef.current = true;
-      resultRef.current = {success: true, password};
+      resultRef.current = {success: true, solution};
       secondarySolutionRef.current = true;
       maybeProceed();
     }
@@ -173,11 +174,11 @@ const MainScreen = (props) => {
     
     if(!telephoneCall) {
       if(password.length === appSettings.solutionLength){
-        escapp.checkNextPuzzle(password, {}, (success, erState) => {
+        escapp.checkNextPuzzle(solution, {}, (success, erState) => {
               Utils.log("Check solution Escapp response", success, erState);
                 try {            
                     puzzleCheckedRef.current = true;
-                    resultRef.current = {success, password};
+                    resultRef.current = {success, solution};
                     maybeProceed();         
                 } catch(e){
                   Utils.log("Error in checkNextPuzzle",e);
@@ -185,7 +186,7 @@ const MainScreen = (props) => {
             });
       }else{
         puzzleCheckedRef.current = true;
-        resultRef.current = {success: false, password};
+        resultRef.current = {success: false, solution};
         maybeProceed();
       }
     }
