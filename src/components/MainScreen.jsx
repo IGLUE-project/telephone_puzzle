@@ -36,7 +36,7 @@ const MainScreen = (props) => {
   const [timer, setTimer] = useState(0); 
   const callingEndedRef = useRef(false);
   const puzzleCheckedRef = useRef(false);
-  const resultRef = useRef({success: false, password: ""});
+  const resultRef = useRef({success: false, solution: ""});
  
 
   useEffect(() => {
@@ -195,7 +195,7 @@ const MainScreen = (props) => {
   function maybeProceed() {
     if (callingEndedRef.current && puzzleCheckedRef.current) {
       setTimeout(() => {
-        secondarySolutionRef.current ? secondaryCall() : changeBoxLight(resultRef.current.success, resultRef.current.password);
+        secondarySolutionRef.current ? secondaryCall() : changeBoxLight(resultRef.current.success, resultRef.current.solution);
       }, 700);
     }
   }

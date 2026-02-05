@@ -7,7 +7,7 @@ export const DEFAULT_APP_SETTINGS = {
   backgroundTelephone : "images/standard/background_telephone.png",
   backgroundDial: "images/standard/dial_telephone.png",
   backgroundMarker: "images/standard/marker.png",
-  backgroundMessage: "images/standard/background_message.png",
+  backgroundTelephoneMessage: "images/standard/background_telephone_message.png",
   numbers: ["1","2","3","4","5","6","7","8","9","0"],
   letters: ["A","B","C","D","E","F","G","H","I","J"],
   colors : [
@@ -90,6 +90,7 @@ export const SKIN_SETTINGS_RETRO = {
   imageLightOff: "images/retro/light_off.png",
   imageLightNok: "images/retro/light_nok.png",
   imageLightOk: "images/retro/light_ok.png",
+  backgroundTelephoneMessage: null,
   fontSize : "5vmin", // Font size for the numbers, letters, colors, or symbols
   dialTextColor: "#FFFFFF", // Color for the dial text
   angleMultiplier: 30, // Angle multiplier to divide the dial into 10 parts
@@ -119,6 +120,7 @@ export const SKIN_SETTINGS_FUTURISTIC = {
   imageLightNok: "images/futuristic/light_nok_futuristic.png",
   imageLightOk: "images/futuristic/light_ok_futuristic.png",
   imageLightWaiting: "images/futuristic/light_waiting.png",
+  backgroundTelephoneMessage: null,
   dialTextSize: "9vmin", // Font size for the dial text
   dialTextColor: "#0fbdfd", // Color for the dial text
   fontSize : "5vmin", // Font size for the numbers, letters, colors, or symbols
