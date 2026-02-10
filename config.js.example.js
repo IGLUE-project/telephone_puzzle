@@ -7,10 +7,14 @@ export let ESCAPP_APP_SETTINGS = {
   actionAfterSolve: "SHOW_MESSAGE", //actionAfterSolve can be "NONE", "SHOW_MESSAGE" or "PLAY_SOUND".
   //message: "Custom message",
   keysType: "NUMBERS", //keys can be "NUMBERS", "LETTERS", "COLORS" or "SYMBOLS".
+telephoneNumbers: [
+    // { number: "1234", src: "sounds/contestador_mensaje.wav" },
+    { number: "111111", src: "sounds/contestador_no_mensaje.wav" },
+  ],
 
   //Settings that will be automatically specified by the Escapp server
   solutionLength: 4,
-  locale:"es",
+  locale: "es",
 
   escappClientSettings: {
     endpoint:"https://escapp.es/api/escapeRooms/id",
