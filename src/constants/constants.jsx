@@ -109,7 +109,6 @@ export const SKIN_SETTINGS_RETRO = {
   imageLightOff: "images/retro/light_off.png",
   imageLightNok: "images/retro/light_nok.png",
   imageLightOk: "images/retro/light_ok.png",
-  fontSize : "5vmin", // Font size for the numbers, letters, colors, or symbols
   dialWidth: 0.25, // Relative size of the dial compared to the box width
   dialHeight: 0.25, // Relative size of the dial compared to the box height
   dialTextSize: "9vmin", // Font size for the dial text
