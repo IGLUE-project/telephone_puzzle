@@ -1,14 +1,7 @@
 export const DEFAULT_APP_SETTINGS = {
   skin: "STANDARD",
   actionAfterSolve: "NONE",
-  message: undefined,
-  keysType: "NUMBERS",
-  background: "images/standard/background.png",
-  backgroundTelephone : "images/standard/background_telephone.png",
-  backgroundDial: "images/standard/dial_telephone.png",
-  backgroundMarker: "images/standard/marker.png",
-  backgroundTelephoneMessage: "images/standard/background_telephone_message.png",
-  numbers: ["1","2","3","4","5","6","7","8","9","0"],
+  keysType: "NUMBERS", //keys can be "NUMBERS", "LETTERS", "COLORS" or "SYMBOLS".
   letters: ["A","B","C","D","E","F","G","H","I","J"],
   colors : [
     "Red", //#FF0000
@@ -46,80 +39,29 @@ export const DEFAULT_APP_SETTINGS = {
     {viewBox:"40 -920 880 880", path:"M480-360q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0 80q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Zm326-268Z"},
     {viewBox:"80 -880 800 800", path:"M120-272q0-16 10.5-27t25.5-11q8 0 15.5 2.5T186-300q13 8 26 14t28 6q33 0 56.5-23.5T320-360q0-33-23.5-56.5T240-440q-15 0-29 5t-25 15q-6 5-14 7.5t-16 2.5q-15 0-25.5-11T120-448v-152q0-17 11.5-28.5T160-640h150q-5-15-7.5-30t-2.5-30q0-75 52.5-127.5T480-880q75 0 127.5 52.5T660-700q0 15-2.5 30t-7.5 30h150q17 0 28.5 11.5T840-600v152q0 17-11.5 28.5T800-408q-8 0-14-3.5t-12-8.5q-11-10-25-15t-29-5q-33 0-56.5 23.5T640-360q0 33 23.5 56.5T720-280q15 0 29-5t25-15q5-5 11.5-8.5T800-312q17 0 28.5 11.5T840-272v152q0 17-11.5 28.5T800-80H160q-17 0-28.5-11.5T120-120v-152Zm80 112h560v-46q-10 3-19.5 4.5T720-200q-66 0-113-47t-47-113q0-66 47-113t113-47q11 0 20.5 1.5T760-514v-46H578q-17 0-28.5-11T538-598q0-8 2.5-16.5T550-628q17-12 23.5-31.5T580-700q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 21 6.5 40.5T410-628q7 5 9.5 12.5T422-600q0 17-11.5 28.5T382-560H200v46q10-3 19.5-4.5T240-520q66 0 113 47t47 113q0 66-47 113t-113 47q-11 0-20.5-1.5T200-206v46Zm280-320Z"},
   ],
-  numbersPosition:[
-    {top: "39.6%", right: "40.2%"},
-    {top: "35.4%", right: "44%"},
-    {top: "34.3%", right: "48.9%"},
-    {top: "36.4%", right: "53.7%"},
-    {top: "41.3%", right: "57%"},
-    {top: "47.7%", right: "58%"},
-    {top: "54.1%", right: "56.65%"},
-    {top: "58.6%", right: "53.2%"},
-    {top: "60.3%", right: "48.4%"},
-    {top: "58.8%", right: "43.6%"},
-  ],
-  imageLightOff: "images/standard/light_off.png",
-  imageLightNok: "images/standard/light_nok.png",
-  imageLightOk: "images/standard/light_ok.png",
+  telephoneNumbers: [],
   soundNok: "sounds/solution_nok.wav",
   soundOk: "sounds/solution_ok.mp3",
   soundDial: "sounds/spin.wav",
   soundRetract: "sounds/retract.wav",
   soundCalling: "sounds/calling.wav",
-  soundPostSuccess: "sounds/post_success.mp3", // Sound played after the solution is correct and the message is shown
-  dialWidth: 0.7, // Relative size of the dial compared to the box width
-  dialHeight: 0.7, // Relative size of the dial compared to the box height
-  dialTextSize: "9vmin", // Font size for the dial text
-  dialTextColor: "#000000", // Color for the dial text
-  angleMultiplier: 30, // Angle multiplier to divide the dial into 10 parts
-  initialAngle: 50, // Initial angle of the dial in degrees
-  fontSize : "6vmin", // Font size for the numbers, letters, colors, or symbols
-  fontColor: "#FFFFFF", // Color for the numbers, letters, colors, or symbols
-  telephoneNumbers: [
-    { number: "1234", src: "sounds/contestador_mensaje.wav" },
-    { number: "111111", src: "sounds/contestador_no_mensaje.wav" },
-  ],
+  soundPostSuccess: "sounds/post_success.mp3", // Sound played after the solution is correct
 
+  // telephoneNumbers: [
+  //   { number: "1234", src: "sounds/contestador_mensaje.wav" },
+  //   { number: "111111", src: "sounds/contestador_no_mensaje.wav" },
+  // ],
 };
 
-export const SKIN_SETTINGS_RETRO = {
-  background: "images/retro/background.png",  
-  backgroundTelephone : "images/retro/background_telephone.png",
-  backgroundDial: "images/retro/background_dial.png",
-  backgroundMessage: "images/retro/background.png",
-  imageLightOff: "images/retro/light_off.png",
-  imageLightNok: "images/retro/light_nok.png",
-  imageLightOk: "images/retro/light_ok.png",
-  backgroundTelephoneMessage: null,
-  fontSize : "5vmin", // Font size for the numbers, letters, colors, or symbols
-  dialTextColor: "#FFFFFF", // Color for the dial text
-  angleMultiplier: 30, // Angle multiplier to divide the dial into 10 parts
-  initialAngle: 50, // Initial angle of the dial in degrees
-  dialWidth: 0.25, // Relative size of the dial compared to the box width
-  dialHeight: 0.25, // Relative size of the dial compared to the box height
-  numbersPosition:[
-    {top: "46.6%", right: "37.3%"},
-    {top: "42.4%", right: "41.2%"},
-    {top: "41.3%", right: "46.2%"},
-    {top: "43.5%", right: "51.3%"},
-    {top: "48.5%", right: "54.8%"},
-    {top: "55.3%", right: "55.8%"},
-    {top: "62%", right: "54.37%"},
-    {top: "66.5%", right: "50.6%"},
-    {top: "68.4%", right: "45.8%"},
-    {top: "67%", right: "40.8%"},
-  ],
-};
-
-export const SKIN_SETTINGS_FUTURISTIC = {
-  background: "images/futuristic/background.png",
-  backgroundTelephone : "images/futuristic/background_telephone.png",
-  backgroundKey: "images/futuristic/button.png",
-  backgroundKeyCall: "images/futuristic/button_call.png",
-  backgroundMessage: "images/futuristic/background_message_futuristic.png",
-  imageLightNok: "images/futuristic/light_nok_futuristic.png",
-  imageLightOk: "images/futuristic/light_ok_futuristic.png",
-  imageLightWaiting: "images/futuristic/light_waiting.png",
+export const SKIN_SETTINGS_STANDARD = {
+  numbers: ["1","2","3","4","5","6","7","8","9","*","0","#"],
+  background: "images/standard/background.png",
+  backgroundTelephone : "images/standard/background_telephone.png",
+  backgroundKey: "images/standard/button.png",
+  backgroundKeyCall: "images/standard/button_call.png",
+  imageLightNok: "images/standard/light_nok_futuristic.png",
+  imageLightOk: "images/standard/light_ok_futuristic.png",
+  imageLightWaiting: "images/standard/light_waiting.png",
   backgroundTelephoneMessage: null,
   dialTextSize: "9vmin", // Font size for the dial text
   dialTextColor: "#0fbdfd", // Color for the dial text
@@ -137,13 +79,57 @@ export const SKIN_SETTINGS_FUTURISTIC = {
     "sounds/beeps/beep8.wav",
     "sounds/beeps/beep9.wav",
     "sounds/beeps/beep10.wav",
-  ],    
+  ],
   screenFontSize: 5, // Font size for the screen text
-  screenFontColor: "#0fbdfd", // Color for the screen text
+  screenFontColor: "#eee", // Color for the screen text
   callButtonSize: "4.5vmin", // Size of the call button
   maxNumber: 15, // Maximum number of digits in the call input
   callingFontSize: 0.1, // Font size for the calling text
   callingFontColor: "white", // Color for the calling text
+  numbersPosition:[
+    {top: "46.6%", right: "37.3%"},
+    {top: "42.4%", right: "41.2%"},
+    {top: "41.3%", right: "46.2%"},
+    {top: "43.5%", right: "51.3%"},
+    {top: "48.5%", right: "54.8%"},
+    {top: "55.3%", right: "55.8%"},
+    {top: "62%", right: "54.37%"},
+    {top: "66.5%", right: "50.6%"},
+    {top: "68.4%", right: "45.8%"},
+    {top: "67%", right: "40.8%"},
+  ],
+};
+
+export const SKIN_SETTINGS_RETRO = {
+  numbers: ["1","2","3","4","5","6","7","8","9","0"],
+  background: "images/retro/background.png",  
+  backgroundTelephone : "images/retro/background_telephone.png",
+  backgroundDial: "images/retro/dial_telephone.png",
+  backgroundMarker: "images/retro/marker.png",
+  imageLightOff: "images/retro/light_off.png",
+  imageLightNok: "images/retro/light_nok.png",
+  imageLightOk: "images/retro/light_ok.png",
+  fontSize : "5vmin", // Font size for the numbers, letters, colors, or symbols
+  dialWidth: 0.25, // Relative size of the dial compared to the box width
+  dialHeight: 0.25, // Relative size of the dial compared to the box height
+  dialTextSize: "9vmin", // Font size for the dial text
+  dialTextColor: "#FFFFFF", // Color for the dial text
+  angleMultiplier: 30, // Angle multiplier to divide the dial into 10 parts
+  initialAngle: 50, // Initial angle of the dial in degrees
+  fontSize : "6vmin", // Font size for the numbers, letters, colors, or symbols
+  fontColor: "#FFFFFF", // Color for the numbers, letters, colors, or symbols
+  numbersPosition:[
+    {top: "37.6%", right: "37.7%"},
+    {top: "32.3%", right: "42.7%"},
+    {top: "30.9%", right: "48.9%"},
+    {top: "33.4%", right: "55.0%"},
+    {top: "39.7%", right: "59.1%"},
+    {top: "47.8%", right: "60.4%"},
+    {top: "56.0%", right: "58.65%"},
+    {top: "61.6%", right: "54.3%"},
+    {top: "63.8%", right: "48.2%"},
+    {top: "61.9%", right: "42.1%"},
+  ],
 };
 
 export const ESCAPP_CLIENT_SETTINGS = {
@@ -151,4 +137,3 @@ export const ESCAPP_CLIENT_SETTINGS = {
 };
 
 export const MAIN_SCREEN = "MAIN_SCREEN";
-export const MESSAGE_SCREEN = "MESSAGE_SCREEN";

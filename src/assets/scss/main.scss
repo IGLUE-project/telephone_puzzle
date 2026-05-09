@@ -11,7 +11,7 @@ div#screen_main {
 	position: relative;
 }
 
-div#keypad {
+div#phone {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
@@ -19,7 +19,7 @@ div#keypad {
 
 }
 
-div#keypad div.row {
+div#phone div.row {
 	display: flex;
 	flex-direction: row;
 	align-items: center;	
@@ -169,7 +169,7 @@ div.pivote{
   100% { content: '...'; }
 }
 
-.futuristicPhoneText{
+.standardPhoneText{
 	margin: 0;
 	width: 100%;
 	text-align: center;

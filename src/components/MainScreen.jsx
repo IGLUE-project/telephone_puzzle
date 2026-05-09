@@ -50,75 +50,70 @@ const MainScreen = (props) => {
     }
 
     let aspectRatio = 4 / 3;
-    let _keypadWidth = Math.min(props.appHeight * aspectRatio, props.appWidth);
-    let _keypadHeight = _keypadWidth / aspectRatio;
 
-    let _lockWidth = Math.min(props.appHeight * aspectRatio, props.appWidth) ;
-    let _lockHeight = _lockWidth / aspectRatio;
+    let _phoneWidth = Math.min(props.appHeight * aspectRatio, props.appWidth) ;
+    let _phoneHeight = _phoneWidth / aspectRatio;
 
-    let _containerWidth = _lockWidth ;
-    let _containerHeight = _lockHeight;
+    let _containerWidth = _phoneWidth;
+    let _containerHeight = _phoneHeight;
 
+    let _containerMarginLeft;
+    let _containerMarginTop;
 
-    let _containerMarginLeft=_lockWidth*0.313;
-    let _containerMarginTop=_lockHeight * 0.315;
-
-    let _boxWidth = _lockWidth * 0.37;
-    let _boxHeight = _lockHeight * 0.37;
+    let _boxWidth;
+    let _boxHeight;
 
     let _lightWidth;
     let _lightHeight;
     let _lightLeft;
     let _lightTop;
 
-    let _telephoneMarginLeft = 0;
-    let _telephoneMarginTop = 0;
+    let _telephoneMarginLeft;
+    let _telephoneMarginTop;
 
-    let _telephoneScreenWidth = _boxWidth *0.46;
-    let _telephoneScreenHeight = _boxHeight*0.25 ;
-    let _telephoneScreenMarginLeft = _boxWidth * 0.07;
-    let _telephoneScreenMarginTop = _boxHeight * 0.3;
+    let _telephoneScreenWidth;
+    let _telephoneScreenHeight;
+    let _telephoneScreenMarginLeft;
+    let _telephoneScreenMarginTop;
 
-    let _callingTextMarginLeft = 0;
-    let _callingTextMarginTop = 0;
-
-
+    let _callingTextMarginLeft;
+    let _callingTextMarginTop;
 
     switch(appSettings.skin){
       case "RETRO":
-        _containerMarginTop = _lockHeight * 0.3;
-        _containerMarginLeft = _lockWidth * 0.265;
-        _containerWidth = _lockWidth * 0.8;
-        _containerHeight = _lockHeight *0.8;
-        _boxWidth = _lockWidth * 0.31;
-        _boxHeight = _lockHeight * 0.31;
-        _lightWidth = _lockWidth * 0.15;
-        _lightHeight = _lockHeight *0.15;
-        _lightLeft = _lockWidth * 0.343;
-        _lightTop =  _lockHeight * 0.735;
+        _containerMarginLeft= _phoneWidth*0.265;
+        _containerMarginTop= _phoneHeight * 0.265;
+        _boxWidth = _phoneWidth * 0.47;
+        _boxHeight = _phoneHeight * 0.47;
+        _lightWidth = _phoneWidth * 0.08;
+        _lightHeight = _phoneHeight * 0.08;
+        _lightLeft =  _phoneWidth  * 0.285;
+        _lightTop =  _phoneHeight  * 0.279;
+        _telephoneMarginLeft = 0;
+        _telephoneMarginTop = 0;
         break;
-      case "FUTURISTIC":
-        _containerMarginTop = _lockHeight * -0.04;
-        _containerMarginLeft = _lockWidth * 0.025;
-        _telephoneMarginLeft = _lockWidth * 0.02;
-        _telephoneMarginTop = _lockHeight * 0.001;
-        _containerWidth = _lockWidth * 0.25;
-        _containerHeight = _lockHeight *0.61;
-        _lightWidth = _containerWidth;
-        _lightHeight = _containerHeight*0.93;
-        _lightLeft = _lockWidth * -0.014;
-        _lightTop =  _lockHeight * 0.01;
-        _boxHeight = _lockHeight * 0.06;
-        _boxWidth = _lockWidth * 0.06;
+      case "STANDARD":
+      default:
+        _containerMarginLeft= _phoneWidth*0.379;
+        _containerMarginTop= _phoneHeight * -0.11;
+        _boxHeight = _phoneHeight * 0.084;
+        _boxWidth = _phoneWidth * 0.084;
+
+        _lightWidth = 0;
+        _lightHeight = 0;
+        _lightLeft = 0;
+        _lightTop =  0;
+        _telephoneMarginLeft = 0;
+        _telephoneMarginTop = 0;
+
+        _telephoneScreenWidth = _boxWidth *3.5;
+        _telephoneScreenHeight = _boxHeight*1.5;
+        _telephoneScreenMarginLeft = _boxWidth * 4.21;
+        _telephoneScreenMarginTop = _boxHeight * 2.5;
+
         _callingTextMarginLeft = _containerWidth * -0.05;
         _callingTextMarginTop = _containerHeight * 0.5;
-
         break;
-      default:
-        _lightWidth = _lockWidth * 0.08;
-        _lightHeight = _lockHeight * 0.08;
-        _lightLeft =  _lockWidth  * 0.33;
-        _lightTop =  _lockHeight  * 0.32
     }
 
     setContainerWidth(_containerWidth);
@@ -147,10 +142,9 @@ const MainScreen = (props) => {
   }
 
 
-
   const checkSolution = () => {
     setProcessingSolution(true);
-    if(appSettings.skin!=="FUTURISTIC")reset(); 
+    if(appSettings.skin !== "STANDARD") reset();
     else setLight("on");
     callingEndedRef.current = false;
     puzzleCheckedRef.current = false;
@@ -235,7 +229,7 @@ const MainScreen = (props) => {
     setTimeout(() => {
       if(!success){
         setLight("off");
-        if(appSettings.skin === "FUTURISTIC")setPassword("");
+        if(appSettings.skin === "STANDARD") setPassword("");
         setProcessingSolution(false);
       }
     }, afterChangeBoxLightDelay);
@@ -246,10 +240,10 @@ const MainScreen = (props) => {
         if(appSettings.actionAfterSolve === "PLAY_SOUND"){
           post_success_audio.play();
           post_success_audio.onended = () => {
-            props.onKeypadSolved(solution);
+            props.onPhoneSolved(solution);
           };
         }else{
-          props.onKeypadSolved(solution);
+          props.onPhoneSolved(solution);
         }
       }
     }else
@@ -274,9 +268,9 @@ const MainScreen = (props) => {
   }
 
   //Pone la imagen del fondo
-  let backgroundImage = 'url("' + appSettings.background + '")';
+  let backgroundImage = "";
   if(appSettings.background && appSettings.background !== "NONE"){
-    backgroundImage += ', url("' + appSettings.background + '")';
+    backgroundImage = 'url("' + appSettings.background + '")';
   }
 
   const buttonSound = (value) => {
@@ -317,7 +311,7 @@ const MainScreen = (props) => {
 
   const pRef = useRef();
   useEffect(() => {
-    if(appSettings.skin !== "FUTURISTIC") return;
+    if(appSettings.skin !== "STANDARD") return;
     const container = document.querySelector('.telephone_screen');
     const p = pRef.current;
     if (!container || !p) return;
@@ -374,15 +368,15 @@ const MainScreen = (props) => {
     });
   };
 
-  const futuristicRender = () => {
+  const standardRender = () => {
     return (<>
       <div className='telephone_screen' style={{left: telephoneScreenMarginLeft, top: telephoneScreenMarginTop,
           width: telephoneScreenWidth, height: telephoneScreenHeight, }}>
-        <div className='futuristicPhoneText' ref={pRef} style={{color: appSettings.screenFontColor, }} id="telephonePassword">
+        <div className='standardPhoneText' ref={pRef} style={{color: appSettings.screenFontColor, }} id="telephonePassword">
           {renderPasswordContent()}
         </div>
       </div>
-      <div className='keypad' id='keypad' style={{ width: containerWidth, height: containerHeight, left: containerMarginLeft, top: containerMarginTop}}>
+      <div className='phone' id='phone' style={{ width: containerWidth, height: containerHeight, left: containerMarginLeft, top: containerMarginTop}}>
         <div id="row1" className="row">
           <BoxButton position={appSettings.keys[1]} value={1} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} containerWidth={containerWidth}/>
           <BoxButton position={appSettings.keys[2]} value={2} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} containerWidth={containerWidth}/>
@@ -466,7 +460,7 @@ const MainScreen = (props) => {
   }
 
   useEffect(() => {
-    if(appSettings.skin === "FUTURISTIC" || processingSolution || password.length <= 0) return;
+    if(appSettings.skin === "STANDARD" || processingSolution || password.length <= 0) return;
     if (timer) {
       clearTimeout(timer); 
     }
@@ -484,7 +478,7 @@ const MainScreen = (props) => {
     <div id="screen_main" className={"screen_content"} style={{ backgroundImage: backgroundImage }}>
       <div id="telephoneContainer" className="telephoneContainer" ref={telephoneRef} 
         style={{backgroundImage: 'url('+appSettings.backgroundTelephone+')', width: containerWidth, height: containerHeight, top: telephoneMarginTop, left: telephoneMarginLeft, position:"relative" }}>
-          {appSettings.skin==="FUTURISTIC" ? futuristicRender() : <>
+          {appSettings.skin==="STANDARD" ? standardRender() : <>
             <div className='numbersContainer' style={{ width: boxWidth, height: boxHeight, }}>
               {appSettings.numbers.map((number, index) => (
                 <Number key={index} value={index} containerWidth={containerWidth}/>
