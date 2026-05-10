@@ -2,19 +2,30 @@
 
 export let ESCAPP_APP_SETTINGS = {
   //Settings that can be specified by the authors
-  skin: "STANDARD", //skin can be "STANDARD", "RETRO" or "FUTURISTIC".
+  skin: "STANDARD", //skin can be "STANDARD" or "RETRO".
+  //showLightFeedback: "TRUE", //only for RETRO
   //background: "NONE", //background can be "NONE" or a URL.
-  actionAfterSolve: "SHOW_MESSAGE", //actionAfterSolve can be "NONE", "SHOW_MESSAGE" or "PLAY_SOUND".
-  //message: "Custom message",
   keysType: "NUMBERS", //keys can be "NUMBERS", "LETTERS", "COLORS" or "SYMBOLS".
-telephoneNumbers: [
-    // { number: "1234", src: "sounds/contestador_mensaje.wav" },
-    { number: "111111", src: "sounds/contestador_no_mensaje.wav" },
+  actionAfterSolve: "PLAY_SOUND", //actionAfterSolve can be "NONE", "SHOW_MESSAGE" or "PLAY_SOUND".
+  //message: "Custom message",
+  //soundAfterSolve: "sounds/pickup_standard.mp3",
+  //disablePhoneAfterSolve: "TRUE", //Disable phone actions after solve the linked puzzle
+  telephoneNumbers: [
+    { 
+      number: "1;2;3;4",
+      audio: "sounds/pickup_standard.mp3",
+      avatar: "images/standard/calling_icon.png"
+    },
+    { 
+      number: "Moon;Moon",
+      audio: "sounds/pickup_standard.mp3",
+      avatar: "images/standard/calling_icon.png"
+    }
   ],
 
   //Settings that will be automatically specified by the Escapp server
   solutionLength: 4,
-  locale: "es",
+  locale:"en",
 
   escappClientSettings: {
     endpoint:"https://escapp.es/api/escapeRooms/id",

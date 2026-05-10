@@ -169,7 +169,7 @@ const MainScreen = (props) => {
     const solution = phoneNumber.join(";");
     Utils.log("Check solution", solution);
     
-    if(phoneNumber.length === appSettings.solutionLength){
+    if((phoneNumber.length === appSettings.solutionLength)&&(appSettings.noLinkedPuzzles===false)){
       escapp.checkNextPuzzle(solution, {}, (success, erState) => {
         Utils.log("Check solution Escapp response", success, erState);
         puzzleCheckedRef.current = true;

@@ -29,7 +29,7 @@ export default function App() {
     setStorage(_escapp.getStorage());
 
     //Get app settings provided by the Escapp server.
-    let _appSettings = processAppSettings(_escapp.getAppSettings());
+    let _appSettings = processAppSettings(_escapp.getAppSettings(),_escapp.getSettings());
     setAppSettings(_appSettings);
     Utils.log("App settings:", _appSettings);
 
@@ -39,7 +39,7 @@ export default function App() {
     }
   }, []);
 
-  function processAppSettings(_appSettings){
+  function processAppSettings(_appSettings,_escappSettings){
     if(typeof _appSettings !== "object"){
       _appSettings = {};
     }
@@ -63,6 +63,7 @@ export default function App() {
      // Merge _appSettings with DEFAULT_APP_SETTINGS_SKIN to obtain final app settings
     _appSettings = Utils.deepMerge(DEFAULT_APP_SETTINGS_SKIN, _appSettings);
 
+    _appSettings.noLinkedPuzzles = (!_escappSettings.linkedPuzzleIds || _escappSettings.linkedPuzzleIds.length === 0);
     _appSettings.showLightFeedbackBoolean = (_appSettings.showLightFeedback === "TRUE");
     _appSettings.disablePhoneAfterSolveBoolean = (_appSettings.disablePhoneAfterSolve === "TRUE");
     

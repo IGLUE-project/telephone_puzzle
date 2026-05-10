@@ -1,10 +1,11 @@
 export const DEFAULT_APP_SETTINGS = {
   skin: "STANDARD",
-  showLightFeedback: "FALSE", //only for RETRO
   actionAfterSolve: "NONE",
   message: undefined,
   soundAfterSolve: undefined,
+  disablePhoneAfterSolve: "FALSE", //Disable phone actions after solve the linked puzzle
   keysType: "NUMBERS", //keys can be "NUMBERS", "LETTERS", "COLORS" or "SYMBOLS".
+  numbers: ["1","2","3","4","5","6","7","8","9","0"],
   letters: ["A","B","C","D","E","F","G","H","I","J","K","L"],
   colors : [
     "Red", //#FF0000
@@ -35,6 +36,7 @@ export const DEFAULT_APP_SETTINGS = {
     "Puzzle",
   ],
   telephoneNumbers: [],
+  fontSize: "5vmin", // Font size for the numbers, letters, colors, or symbols
 };
 
 export const SKIN_SETTINGS_STANDARD = {
@@ -45,9 +47,7 @@ export const SKIN_SETTINGS_STANDARD = {
   backgroundKeyCallOn: "images/standard/button_call.png",
   backgroundKeyCallOff: "images/standard/button_call_end.png",
   imageCalling: "images/standard/calling_icon.png",
-  dialTextSize: "9vmin", // Font size for the dial text
-  dialTextColor: "#0fbdfd", // Color for the dial text
-  fontSize: "5vmin", // Font size for the numbers, letters, colors, or symbols
+  fontSize: "5vmin",
   fontColor: "#FFFFFF",
   soundBeepGeneric: "sounds/beeps/beep_generic.wav",
   soundBeepDelete: "sounds/beeps/beep_delete.wav",
@@ -71,10 +71,7 @@ export const SKIN_SETTINGS_STANDARD = {
   screenPhoneNumberFontColor: "#eee",
   screenCallingTextFontSize: "2.5vmin",
   screenCallingTextFontColor: "#eee",
-  callButtonSize: "4.5vmin", // Size of the call button
   maxNumber: 9, // Maximum number of digits in the call input
-  callingFontSize: 0.1, // Font size for the calling text
-  callingFontColor: "white", // Color for the calling text
   numbersPosition:[
     {top: "46.6%", right: "37.3%"},
     {top: "42.4%", right: "41.2%"},
@@ -90,6 +87,7 @@ export const SKIN_SETTINGS_STANDARD = {
 };
 
 export const SKIN_SETTINGS_RETRO = {
+  showLightFeedback: "FALSE",
   numbers: ["1","2","3","4","5","6","7","8","9","0"],
   background: "images/retro/background.png",  
   backgroundTelephone : "images/retro/background_telephone.png",
@@ -98,10 +96,6 @@ export const SKIN_SETTINGS_RETRO = {
   imageLightOff: "images/retro/light_off.png",
   imageLightNok: "images/retro/light_nok.png",
   imageLightOk: "images/retro/light_ok.png",
-  dialWidth: 0.25, // Relative size of the dial compared to the box width
-  dialHeight: 0.25, // Relative size of the dial compared to the box height
-  dialTextSize: "9vmin", // Font size for the dial text
-  dialTextColor: "#FFFFFF", // Color for the dial text
   angleMultiplier: 30, // Angle multiplier to divide the dial into 10 parts
   initialAngle: 50, // Initial angle of the dial in degrees
   fontSize : "6vmin", // Font size for the numbers, letters, colors, or symbols
