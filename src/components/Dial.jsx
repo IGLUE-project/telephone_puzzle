@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from 'react';
 import { GlobalContext } from "./GlobalContext";
 
 const  Dial = ( props ) => {
-    const {  appSettings } = useContext(GlobalContext);
+    const { appSettings } = useContext(GlobalContext);
     const [initialRotation, setInitialRotation] = useState(0); // Ángulo inicial del lock
     const [startAngle, setStartAngle] = useState(0); // Ángulo inicial del ratón
     const [rotationDirection, setRotationDirection] = useState(""); 
@@ -44,23 +44,27 @@ const  Dial = ( props ) => {
     };
 
     const getNumber = (angle) => {
-      props.setPhoneNumber((prevPhoneNumber) => prevPhoneNumber + findNumber(angle)); // Concatena el número al estado `password`
+      let key = appSettings.keys[findNumber(angle)-1];
+      props.setPhoneNumber(prevPhoneNumber => [
+        ...prevPhoneNumber,
+        key
+      ]);
     }
 
     const findNumber = (angle) => {
       let number=""
       let angleMultiplier= appSettings.angleMultiplier; // Multiplicador de ángulo para dividir el dial en 10 partes
       let initialAngle = appSettings.initialAngle; // Ángulo inicial del dial
-      if(angle > initialAngle && angle <= initialAngle+angleMultiplier*1)number="1";
-      else if(angle > initialAngle+angleMultiplier*1 && angle <= initialAngle+angleMultiplier*2)number="2";
-      else if(angle > initialAngle+angleMultiplier*2 && angle <= initialAngle+angleMultiplier*3)number="3";
-      else if(angle > initialAngle+angleMultiplier*3 && angle <= initialAngle+angleMultiplier*4)number="4";
-      else if(angle > initialAngle+angleMultiplier*4 && angle <= initialAngle+angleMultiplier*5)number="5";
-      else if(angle > initialAngle+angleMultiplier*5 && angle <= initialAngle+angleMultiplier*6)number="6";
-      else if(angle > initialAngle+angleMultiplier*6 && angle <= initialAngle+angleMultiplier*7)number="7";
-      else if(angle > initialAngle+angleMultiplier*7 && angle <= initialAngle+angleMultiplier*8)number="8";
-      else if(angle > initialAngle+angleMultiplier*8 && angle <= initialAngle+angleMultiplier*9)number="9";
-      else if(angle > initialAngle+angleMultiplier*9)number="0";
+      if(angle > initialAngle && angle <= initialAngle+angleMultiplier*1) number="1";
+      else if(angle > initialAngle+angleMultiplier*1 && angle <= initialAngle+angleMultiplier*2) number="2";
+      else if(angle > initialAngle+angleMultiplier*2 && angle <= initialAngle+angleMultiplier*3) number="3";
+      else if(angle > initialAngle+angleMultiplier*3 && angle <= initialAngle+angleMultiplier*4) number="4";
+      else if(angle > initialAngle+angleMultiplier*4 && angle <= initialAngle+angleMultiplier*5) number="5";
+      else if(angle > initialAngle+angleMultiplier*5 && angle <= initialAngle+angleMultiplier*6) number="6";
+      else if(angle > initialAngle+angleMultiplier*6 && angle <= initialAngle+angleMultiplier*7) number="7";
+      else if(angle > initialAngle+angleMultiplier*7 && angle <= initialAngle+angleMultiplier*8) number="8";
+      else if(angle > initialAngle+angleMultiplier*8 && angle <= initialAngle+angleMultiplier*9) number="9";
+      else if(angle > initialAngle+angleMultiplier*9) number="10";
       return number;
     }
 

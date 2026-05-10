@@ -46,7 +46,12 @@ div.boxButton:active {
 }
 
 div.boxButton:hover {
-	filter: brightness(1.5);
+	filter: brightness(1.2);
+}
+
+div.boxButton.removeNumberButton svg {
+	max-width: 45%;
+	padding-right: 2%;
 }
 
 div.boxButton div {
@@ -59,16 +64,15 @@ div.boxButton div {
 	text-align: center;
 	font-size: 4vmin;
 	font-family: "Consolas", "Roboto", sans-serif;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none; 
-  -moz-user-select: none;
-  -ms-user-select: none; 
-  user-select: none;
-  cursor: pointer; 
-  align-items: center;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none; 
+	-moz-user-select: none;
+	-ms-user-select: none; 
+	user-select: none;
+	cursor: pointer; 
+	align-items: center;
 }
-
 
 div.boxLight {
 	position: absolute;
@@ -106,7 +110,6 @@ div.boxLight {
 	justify-content: center;
 	flex-direction: column;
 }
-
 
 .dial{
 	background-position: center;
@@ -149,6 +152,7 @@ div.pivote{
 
 .telephone_screen{
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
@@ -171,11 +175,23 @@ div.pivote{
   100% { content: '...'; }
 }
 
-.standardPhoneText{
-	margin: 0;
+div.standardPhoneText, div.callingText {
 	width: 100%;
 	text-align: center;
 	white-space: nowrap;
+}
+
+div.standardPhoneText {
+	margin: 0;
+}
+
+div.callingText {
+	margin: 0% 0% 5% 10%;
+    width: 95%;
+}
+
+div.callingText p {
+	margin: 0;
 }
 
 #escapp-modal div.escapp-modal__container {
@@ -186,4 +202,12 @@ div.pivote{
 #escapp-modal button.escapp-modal__btn {
 	font-size: 3vmin;
 	font-family: "Roboto", sans-serif;
+}
+
+div.calling_icon {
+	background-size: 100% 100%;
+}
+
+#global_wrapper.standard div.screen_content_COLORS div.boxButton10 div.color {
+	border: 2px solid white;
 }

@@ -64,6 +64,7 @@ export default function App() {
     _appSettings = Utils.deepMerge(DEFAULT_APP_SETTINGS_SKIN, _appSettings);
 
     _appSettings.showLightFeedbackBoolean = (_appSettings.showLightFeedback === "TRUE");
+    _appSettings.disablePhoneAfterSolveBoolean = (_appSettings.disablePhoneAfterSolve === "TRUE");
     
     const allowedActions = ["NONE", "PLAY_SOUND"];
     if(!allowedActions.includes(_appSettings.actionAfterSolve)) {
@@ -79,6 +80,7 @@ export default function App() {
         break;
       case "SYMBOLS":
         _appSettings.keys = _appSettings.symbols;
+        _appSettings.maxNumber = Math.min(_appSettings.maxNumber, 8);
         break;
       default:
         //NUMBERS

@@ -42,14 +42,12 @@ export const SKIN_SETTINGS_STANDARD = {
   background: "images/standard/background.png",
   backgroundTelephone : "images/standard/background_telephone.png",
   backgroundKey: "images/standard/button.png",
-  backgroundKeyCall: "images/standard/button_call.png",
-  imageLightNok: "images/standard/light_nok_futuristic.png",
-  imageLightOk: "images/standard/light_ok_futuristic.png",
-  imageLightWaiting: "images/standard/light_waiting.png",
-  backgroundTelephoneMessage: null,
+  backgroundKeyCallOn: "images/standard/button_call.png",
+  backgroundKeyCallOff: "images/standard/button_call_end.png",
+  imageCalling: "images/standard/calling_icon.png",
   dialTextSize: "9vmin", // Font size for the dial text
   dialTextColor: "#0fbdfd", // Color for the dial text
-  fontSize : "5vmin", // Font size for the numbers, letters, colors, or symbols
+  fontSize: "5vmin", // Font size for the numbers, letters, colors, or symbols
   fontColor: "#FFFFFF",
   soundBeepGeneric: "sounds/beeps/beep_generic.wav",
   soundBeepDelete: "sounds/beeps/beep_delete.wav",
@@ -68,8 +66,11 @@ export const SKIN_SETTINGS_STANDARD = {
   soundCalling: "sounds/calling_standard.wav",
   soundWrongNumber: "sounds/disconnect_standard.wav",
   soundPickup: "sounds/pickup_standard.mp3",
-  screenFontSize: 5, // Font size for the screen text
-  screenFontColor: "#eee", // Color for the screen text
+  screenPhoneNumberFontSize: "5vmin",
+  screenPhoneSymbolFontSize: "4.5vmin",
+  screenPhoneNumberFontColor: "#eee",
+  screenCallingTextFontSize: "2.5vmin",
+  screenCallingTextFontColor: "#eee",
   callButtonSize: "4.5vmin", // Size of the call button
   maxNumber: 9, // Maximum number of digits in the call input
   callingFontSize: 0.1, // Font size for the calling text
