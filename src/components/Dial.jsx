@@ -44,7 +44,7 @@ const  Dial = ( props ) => {
     };
 
     const getNumber = (angle) => {
-      props.setPassword((prevPassword) => prevPassword + findNumber(angle)); // Concatena el número al estado `password`
+      props.setPhoneNumber((prevPhoneNumber) => prevPhoneNumber + findNumber(angle)); // Concatena el número al estado `password`
     }
 
     const findNumber = (angle) => {

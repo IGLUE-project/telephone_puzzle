@@ -2,6 +2,7 @@ import React from 'react';
 import {useState, useEffect, useRef, useContext } from 'react';
 import { GlobalContext } from "./GlobalContext";
 import './../assets/scss/app.scss';
+import './../assets/scss/fonts.scss';
 
 import { DEFAULT_APP_SETTINGS, SKIN_SETTINGS_STANDARD, SKIN_SETTINGS_RETRO, ESCAPP_CLIENT_SETTINGS, MAIN_SCREEN } from '../constants/constants.jsx';
 import MainScreen from './MainScreen.jsx';
@@ -61,6 +62,8 @@ export default function App() {
  
      // Merge _appSettings with DEFAULT_APP_SETTINGS_SKIN to obtain final app settings
     _appSettings = Utils.deepMerge(DEFAULT_APP_SETTINGS_SKIN, _appSettings);
+
+    _appSettings.showLightFeedbackBoolean = (_appSettings.showLightFeedback === "TRUE");
     
     const allowedActions = ["NONE", "PLAY_SOUND"];
     if(!allowedActions.includes(_appSettings.actionAfterSolve)) {
@@ -168,18 +171,7 @@ export default function App() {
       return;
     }
     solution.current = _solution;
-
-    switch(appSettings.actionAfterSolve){
-      case "SHOW_MESSAGE":
-        // TO DO
-        return;
-      case "PLAY_SOUND":
-        // TO DO
-        return; 
-      case "NONE":
-      default:
-        return submitPuzzleSolution();
-    }
+    return submitPuzzleSolution();
   }
 
   function submitPuzzleSolution(){

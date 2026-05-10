@@ -1,6 +1,6 @@
 export let LOCALES = {
   en:{
-    "i.message": "You've dialed the correct number! \n Click 'Continue' to advance to the next puzzle.",
+    "i.message": "You have dialed the correct number! \n Click 'Continue' to advance to the next puzzle.",
     "i.continue":"Continue",
     "i.calling":"Calling",
     "i.noResponse":"No response",
@@ -12,9 +12,9 @@ export let LOCALES = {
     "i.noResponse":"Sin respuesta",
   },
   sr:{
-    "i.message": "You've dialed the correct number! \n Click 'Continue' to advance to the next puzzle.",
-    "i.continue":"Continue",
-    "i.calling":"Calling",
-    "i.noResponse":"No response",
+    "i.message": "Pozvali ste ispravan broj! \n Kliknite na 'Nastavi' da biste prešli na sledeću zagonetku.",
+    "i.continue":"Nastavi",
+    "i.calling":"Pozivanje",
+    "i.noResponse":"Nema odgovora",
   },
 };
