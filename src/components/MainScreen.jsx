@@ -95,8 +95,8 @@ const MainScreen = (props) => {
         break;
       case "STANDARD":
       default:
-        _containerMarginLeft= _phoneWidth*0.379;
-        _containerMarginTop= _phoneHeight * -0.11;
+        _containerMarginLeft = _phoneWidth * 0.379;
+        _containerMarginTop = _phoneHeight * 0.350;
         _boxHeight = _phoneHeight * 0.084;
         _boxWidth = _phoneWidth * 0.084;
 
@@ -400,28 +400,28 @@ const MainScreen = (props) => {
         </div>
       </div>
       <div className="calling_icon" style={{ visibility: (callState !== "off") ? "visible" : "hidden", opacity: (callState !== "off") ? "1" : "0", width: (telephoneScreenWidth*0.6), height: (telephoneScreenWidth*0.6), backgroundImage: 'url("' + imageCalling + '")', transition: "opacity 1s, transform 0.5s",}} />
-      <div className='phone' id='phone' style={{ width: containerWidth, height: containerHeight, left: containerMarginLeft, top: containerMarginTop}}>
-        <div id="row1" className="row" style={{visibility: (callState === "off") ? "visible" : "hidden"}}>
-          <BoxButton position={1} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} containerWidth={containerWidth}/>
-          <BoxButton position={2} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} containerWidth={containerWidth}/>
-          <BoxButton position={3} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} containerWidth={containerWidth}/>
+      <div className='phone' id='phone' style={{ width: telephoneScreenWidth, height: (containerHeight*0.50), left: containerMarginLeft, top: containerMarginTop}}>
+        <div id="row1" className="row" style={{visibility: (callState === "off") ? "visible" : "hidden", top: 0}}>
+          <BoxButton position={1} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
+          <BoxButton position={2} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
+          <BoxButton position={3} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
         </div>
-        <div id="row2" className="row" style={{visibility: (callState === "off") ? "visible" : "hidden", top: containerHeight*0.55}}>
-          <BoxButton position={4} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} containerWidth={containerWidth}/>
-          <BoxButton position={5} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} containerWidth={containerWidth}/>
-          <BoxButton position={6} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} containerWidth={containerWidth}/>
+        <div id="row2" className="row" style={{visibility: (callState === "off") ? "visible" : "hidden", top: containerHeight*0.10}}>
+          <BoxButton position={4} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
+          <BoxButton position={5} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
+          <BoxButton position={6} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
         </div>
-        <div id="row3" className="row" style={{visibility: (callState === "off") ? "visible" : "hidden", top: containerHeight*0.65}}>
-          <BoxButton position={7} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} containerWidth={containerWidth}/>
-          <BoxButton position={8} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} containerWidth={containerWidth}/>
-          <BoxButton position={9} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} containerWidth={containerWidth}/>
+        <div id="row3" className="row" style={{visibility: (callState === "off") ? "visible" : "hidden", top: containerHeight*0.20}}>
+          <BoxButton position={7} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
+          <BoxButton position={8} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
+          <BoxButton position={9} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
         </div>
-        <div id="row4" className="row" style={{visibility: (callState === "off") ? "visible" : "hidden", top: containerHeight*0.75}}>
-          <BoxButton position={10} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} containerWidth={containerWidth}/>
-          <BoxButton position={11} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} containerWidth={containerWidth}/>
-          <BoxButton position={12} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} containerWidth={containerWidth}/>
+        <div id="row4" className="row" style={{visibility: (callState === "off") ? "visible" : "hidden", top: containerHeight*0.30}}>
+          <BoxButton position={10} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
+          <BoxButton position={11} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
+          <BoxButton position={12} boxWidth={boxWidth} boxHeight={boxHeight} onClick={(value) => onClickButton(value)} />
         </div>
-        <div id="row5" className="row" style={{top: containerHeight*0.86}}>
+        <div id="row5" className="row" style={{top: containerHeight*0.42}}>
           <div
             className='boxButton callButton'
             onClick={onClickCallButton}

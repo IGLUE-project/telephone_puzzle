@@ -25,7 +25,7 @@ div#phone div.row {
 }
 
 #row5 {
-	margin-left: 8.4%;
+	margin-left: 28.0%;
 }
 
 div.boxButton {
@@ -194,12 +194,12 @@ div.callingText p {
 	margin: 0;
 }
 
-#escapp-modal div.escapp-modal__container {
+#escapp-modal.escapp_custom_dialog div.escapp-modal__container {
 	font-size: 4vmin;
 	font-family: "Roboto", sans-serif;
 }
 
-#escapp-modal button.escapp-modal__btn {
+#escapp-modal.escapp_custom_dialog button.escapp-modal__btn {
 	font-size: 3vmin;
 	font-family: "Roboto", sans-serif;
 }
