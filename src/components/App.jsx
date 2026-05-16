@@ -67,9 +67,9 @@ export default function App() {
     _appSettings.showLightFeedbackBoolean = (_appSettings.showLightFeedback === "TRUE");
     _appSettings.disablePhoneAfterSolveBoolean = (_appSettings.disablePhoneAfterSolve === "TRUE");
     
-    const allowedActions = ["NONE", "PLAY_SOUND"];
+    const allowedActions = ["NONE", "SHOW_MESSAGE", "PLAY_SOUND"];
     if(!allowedActions.includes(_appSettings.actionAfterSolve)) {
-      _appSettings.actionAfterSolve = DEFAULT_APP_SETTINGS.actionAfterSolve;
+      _appSettings.actionAfterSolve = "PLAY_SOUND";
     }
 
     switch(_appSettings.keysType){
